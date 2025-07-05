@@ -11,6 +11,8 @@ function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
 
+  const [selectedContacts, setSelectedContacts] = useState([]);
+  const [isBulkDelete, setIsBulkDelete] = useState(false);
 
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
@@ -34,42 +36,68 @@ function App() {
     setEditableContact(null);
   };
 
-  const handleDeleteClick = contact => {
+  const handleDeleteClick = (contact) => {
     setContactToDelete(contact);
     setModalVisible(true);
-  }
+  };
+
+  const handleBulkDeleteClick = () => {
+    setIsBulkDelete(true);
+    setModalVisible(true);
+  };
 
   return (
     <div>
       <h1>Contact Form</h1>
       <hr />
       <br />
+
       <ContactForm
         onAddContact={handleAddContact}
         editableContact={editableContact}
         onUpdateContact={handleUpdateContact}
       />
+
       <ContactList
         contacts={contacts}
         onDeleteContact={handleDeleteContact}
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
+        selectedContacts={selectedContacts}
+        setSelectedContacts={setSelectedContacts}
       />
-      {modalVisible && contactToDelete && (
+
+      {selectedContacts.length > 0 && (
+        <button onClick={handleBulkDeleteClick}>Delete Contacts</button>
+      )}
+
+      {modalVisible && (contactToDelete || isBulkDelete) && (
         <ConfirmModal
-          message={`Are you sure you want to delete ${contactToDelete.firstName}?`}
+          message={
+            isBulkDelete
+              ? `Are you sure you want to delete ${selectedContacts.length} selected contacts?`
+              : `Are you sure you want to delete ${contactToDelete.firstName}?`
+          }
           onConfirm={() => {
-            handleDeleteContact(contactToDelete.id);
+            if (isBulkDelete) {
+              setContacts((prev) =>
+                prev.filter((contact) => !selectedContacts.includes(contact.id))
+              );
+              setSelectedContacts([]);
+              setIsBulkDelete(false);
+            } else {
+              handleDeleteContact(contactToDelete.id);
+              setContactToDelete(null);
+            }
             setModalVisible(false);
-            setContactToDelete(null);
           }}
           onCancel={() => {
             setModalVisible(false);
             setContactToDelete(null);
+            setIsBulkDelete(false);
           }}
         />
-)}
-
+      )}
     </div>
   );
 }
