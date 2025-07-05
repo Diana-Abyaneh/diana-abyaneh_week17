@@ -5,8 +5,14 @@ import ContactList from "./ContactList";
 function App() {
   const [contacts, setContacts] = useState([]);
 
-  const handleAddContact = (newContact) =>
-    setContacts([...contacts, newContact]);
+  const handleAddContact = (newContact) => {
+    const newContactWithId = { ...newContact, id: crypto.randomUUID() };
+    setContacts([...contacts, newContactWithId]);
+  };
+
+  const handleDeleteContact = (id) => {
+    setContacts(contacts.filter((contact) => contact.id !== id));
+  };
 
   return (
     <div>
@@ -14,7 +20,7 @@ function App() {
       <hr />
       <br />
       <ContactForm onAddContact={handleAddContact} />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} onDeleteContact={handleDeleteContact} />
     </div>
   );
 }
