@@ -7,6 +7,9 @@ function App() {
 
   const [editableContact, setEditableContact] = useState(null);
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [contactToDelete, setContactToDelete] = useState(null);
+
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
     setContacts([...contacts, newContactWithId]);
@@ -29,6 +32,11 @@ function App() {
     setEditableContact(null);
   };
 
+  const handleDeleteClick = contact => {
+    setContactToDelete(contact);
+    setModalVisible(true);
+  }
+
   return (
     <div>
       <h1>Contact Form</h1>
@@ -43,7 +51,19 @@ function App() {
         contacts={contacts}
         onDeleteContact={handleDeleteContact}
         onEditContact={handleEditContact}
+        onRequestDelete={handleDeleteClick}
       />
+      {modalVisible && (
+        <ConfirmModal
+          message={`Are you sure you want to delete ${contactToDelete.firstName}?`}
+          onConfirm={() => {
+            handleDeleteContact(contactToDelete.id);
+            setModalVisible(false);
+          }}
+          onCancel={() => setModalVisible(false)}
+        />
+)}
+
     </div>
   );
 }
