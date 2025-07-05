@@ -20,7 +20,7 @@ function ContactList({
     <div>
       <h2>Contacts list</h2>
       {contacts.length === 0 ? (
-        <p>No contacts yet.</p>
+        <p>No matching contact found.</p>
       ) : (
         <ul>
           {contacts.map((contact) => (

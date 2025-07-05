@@ -14,6 +14,8 @@ function App() {
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [isBulkDelete, setIsBulkDelete] = useState(false);
 
+  const [search, setSearch] = useState("");
+
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
     setContacts([...contacts, newContactWithId]);
@@ -46,11 +48,24 @@ function App() {
     setModalVisible(true);
   };
 
+  const filteredContacts = contacts.filter((contact) => {
+    const fullText = `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
+    return fullText.includes(search.toLowerCase());
+  });
+
+
   return (
     <div>
       <h1>Contact Form</h1>
       <hr />
       <br />
+
+      <input
+        type="text"
+        placeholder="Search contacts..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
       <ContactForm
         onAddContact={handleAddContact}
@@ -59,7 +74,7 @@ function App() {
       />
 
       <ContactList
-        contacts={contacts}
+        contacts={filteredContacts}
         onDeleteContact={handleDeleteContact}
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
