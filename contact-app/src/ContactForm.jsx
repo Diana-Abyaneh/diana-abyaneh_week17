@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function ContactForm() {
+function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
+
+  useEffect(() => {
+    if (editableContact) {
+      setFormData({
+        firstName: editableContact.firstName,
+        lastName: editableContact.lastName,
+        email: editableContact.email,
+      });
+    }
+  }, [editableContact]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,20 +26,23 @@ function ContactForm() {
     if (!formData.email) newErrors.email = "Email is required!";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = "Email format is invalid!"
+    if (formData.email && !emailRegex.test(formData.email)) {
+      newErrors.email = "Email format is invalid!";
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setErrors({});
+    if (editableContact) {
+      onUpdateContact({ ...formData, id: editableContact.id });
+    } else {
+      onAddContact(formData);
+    }
 
-    console.log(formData);
     setFormData({ firstName: "", lastName: "", email: "" });
-
   };
 
   const [errors, setErrors] = useState({});
@@ -67,7 +80,7 @@ function ContactForm() {
       />
       {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       <button type="submit" onClick={handleSubmit}>
-        Submit
+        {editableContact ? "Update Contact" : "Add Contact"}
       </button>
     </form>
   );
