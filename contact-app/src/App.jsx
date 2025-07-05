@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div>
-      <h1>Contact Form</h1>
+      <h1>Contact App | <span>store your contacts</span> </h1>
       <hr />
       <br />
 
@@ -81,6 +81,9 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+
+      <br />
+      <br />
 
       {successMessage && (
         <div style={{ color: "green", marginBottom: "10px" }}>

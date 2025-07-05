@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./contactForm.css"
 
 function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
   const [formData, setFormData] = useState({
@@ -49,8 +50,9 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
 
   return (
     <form action="">
-      <label htmlFor="firstName">First name: </label>
-      <input
+      <div className="form-inputs">
+        <label htmlFor="firstName">First name: </label>
+        <input
         type="text"
         name="firstName"
         id="firstName"
@@ -58,26 +60,28 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
         onChange={(e) =>
           setFormData({ ...formData, firstName: e.target.value })
         }
-      />
-      {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
-      <label htmlFor="lastName">Last name: </label>
-      <input
-        type="text"
-        name="lastName"
-        id="lastName"
-        value={formData.lastName}
-        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-      />
-      {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
+        />
+        {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
+        <label htmlFor="lastName">Last name: </label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          value={formData.lastName}
+          onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+        />
+        {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
 
-      <label htmlFor="email">Email: </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-      />
+        <label htmlFor="email">Email: </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
+      </div>
+      
       {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       <button type="submit" onClick={handleSubmit}>
         {editableContact ? "Update Contact" : "Add Contact"}
