@@ -52,7 +52,15 @@ function App() {
     const fullText = `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
     return fullText.includes(search.toLowerCase());
   });
-
+  
+  const handleToggleSelectAll = () => {
+    if(selectedContacts.length === filteredContacts.length)
+      setSelectedContacts([]);
+    else {
+      const allVisibleIds = filteredContacts.map((contact) => contact.id);
+      setSelectedContacts(allVisibleIds);
+    }
+  }
 
   return (
     <div>
@@ -81,6 +89,16 @@ function App() {
         selectedContacts={selectedContacts}
         setSelectedContacts={setSelectedContacts}
       />
+
+      {filteredContacts.length > 0 && (
+        <div style={{ marginBottom: "10px" }}>
+          <button onClick={handleToggleSelectAll}>
+            {selectedContacts.length === filteredContacts.length
+              ? "Unselect All"
+              : "Select All"}
+          </button>
+        </div>
+      )}
 
       {selectedContacts.length > 0 && (
         <button onClick={handleBulkDeleteClick}>Delete Contacts</button>
