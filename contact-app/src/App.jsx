@@ -16,6 +16,8 @@ function App() {
 
   const [search, setSearch] = useState("");
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
     setContacts([...contacts, newContactWithId]);
@@ -36,6 +38,10 @@ function App() {
       )
     );
     setEditableContact(null);
+    setSuccessMessage("Contact updated successfully!");
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
   };
 
   const handleDeleteClick = (contact) => {
@@ -49,18 +55,19 @@ function App() {
   };
 
   const filteredContacts = contacts.filter((contact) => {
-    const fullText = `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
+    const fullText =
+      `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
     return fullText.includes(search.toLowerCase());
   });
-  
+
   const handleToggleSelectAll = () => {
-    if(selectedContacts.length === filteredContacts.length)
+    if (selectedContacts.length === filteredContacts.length)
       setSelectedContacts([]);
     else {
       const allVisibleIds = filteredContacts.map((contact) => contact.id);
       setSelectedContacts(allVisibleIds);
     }
-  }
+  };
 
   return (
     <div>
@@ -74,6 +81,12 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+
+      {successMessage && (
+        <div style={{ color: "green", marginBottom: "10px" }}>
+          {successMessage}
+        </div>
+      )}
 
       <ContactForm
         onAddContact={handleAddContact}
@@ -118,9 +131,19 @@ function App() {
               );
               setSelectedContacts([]);
               setIsBulkDelete(false);
+              setSuccessMessage(
+                `${selectedContacts.length} contacts deleted successfully!`
+              );
+              setTimeout(() => {
+                setSuccessMessage("");
+              }, 3000);
             } else {
               handleDeleteContact(contactToDelete.id);
               setContactToDelete(null);
+              setSuccessMessage("Contact deleted successfully!");
+              setTimeout(() => {
+                setSuccessMessage("");
+              }, 3000);
             }
             setModalVisible(false);
           }}
