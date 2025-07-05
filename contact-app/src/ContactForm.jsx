@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ContactForm() {
+function ContactForm({ onAddContact }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -16,20 +16,20 @@ function ContactForm() {
     if (!formData.email) newErrors.email = "Email is required!";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = "Email format is invalid!"
+    if (formData.email && !emailRegex.test(formData.email)) {
+      newErrors.email = "Email format is invalid!";
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setErrors({});
 
     console.log(formData);
+    onAddContact(formData);
     setFormData({ firstName: "", lastName: "", email: "" });
-
   };
 
   const [errors, setErrors] = useState({});
