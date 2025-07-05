@@ -1,5 +1,5 @@
 
-function ContactList({ contacts, onDeleteContact, onEditContact }) {
+function ContactList({ contacts, onRequestDelete, onEditContact }) {
   return (
     <div>
       <h2>Contacts list</h2>

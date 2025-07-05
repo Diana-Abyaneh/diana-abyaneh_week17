@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
+import ConfirmModal from "./ConfirmModal";
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -9,6 +10,7 @@ function App() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
+
 
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
@@ -53,14 +55,18 @@ function App() {
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
       />
-      {modalVisible && (
+      {modalVisible && contactToDelete && (
         <ConfirmModal
           message={`Are you sure you want to delete ${contactToDelete.firstName}?`}
           onConfirm={() => {
             handleDeleteContact(contactToDelete.id);
             setModalVisible(false);
+            setContactToDelete(null);
           }}
-          onCancel={() => setModalVisible(false)}
+          onCancel={() => {
+            setModalVisible(false);
+            setContactToDelete(null);
+          }}
         />
 )}
 

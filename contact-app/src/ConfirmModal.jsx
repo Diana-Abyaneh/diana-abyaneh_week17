@@ -1,15 +1,15 @@
 import React from 'react'
 
-function ConfirmModal( message, onConfirm, onCancel) {
+function ConfirmModal({message, onConfirm, onCancel}) {
   return (
     <div style={styles.overlay}>
         <div style={styles.modal}>
             <p>{message}</p>
             <div style={styles.buttons}>
-            <button onClick={onConfirm}>Yes</button>
-            <button onClick={onCancel}>Cancel</button>
+                <button onClick={onConfirm}>Yes</button>
+                <button onClick={onCancel}>Cancel</button>
+            </div>
         </div>
-      </div>
     </div>
   )
 }
