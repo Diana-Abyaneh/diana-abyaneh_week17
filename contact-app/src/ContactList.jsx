@@ -1,5 +1,5 @@
 
-function ContactList({ contacts, onDeleteContact }) {
+function ContactList({ contacts, onDeleteContact, onEditContact }) {
   return (
     <div>
       <h2>Contacts list</h2>
@@ -9,6 +9,7 @@ function ContactList({ contacts, onDeleteContact }) {
           <li key={contact.id}>
             {contact.firstName} {contact.lastName} - {contact.email}
             <button onClick={() => onDeleteContact(contact.id)}>Delete</button>
+            <button onClick={() => onEditContact(contact)}>Edit</button>
           </li>
         ))}
       </ul>

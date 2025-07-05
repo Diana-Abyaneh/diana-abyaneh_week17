@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function ContactForm({ onAddContact }) {
+function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
+
+  useEffect(() => {
+    if (editableContact) {
+      setFormData({
+        firstName: editableContact.firstName,
+        lastName: editableContact.lastName,
+        email: editableContact.email,
+      });
+    }
+  }, [editableContact]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,9 +36,12 @@ function ContactForm({ onAddContact }) {
     }
 
     setErrors({});
+    if (editableContact) {
+      onUpdateContact({ ...formData, id: editableContact.id });
+    } else {
+      onAddContact(formData);
+    }
 
-    console.log(formData);
-    onAddContact(formData);
     setFormData({ firstName: "", lastName: "", email: "" });
   };
 
@@ -67,7 +80,7 @@ function ContactForm({ onAddContact }) {
       />
       {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       <button type="submit" onClick={handleSubmit}>
-        Submit
+        {editableContact ? "Update Contact" : "Add Contact"}
       </button>
     </form>
   );
