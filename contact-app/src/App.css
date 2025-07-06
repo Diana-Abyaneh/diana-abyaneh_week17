@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-  margin: 3rem 9rem;
+  margin: 2rem 7rem;
   border: none 1px;
   border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -26,7 +26,7 @@ body {
 
 .form-inputs {
   display: flex;
-  gap: 16px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   margin-bottom: 4rem;
@@ -36,7 +36,7 @@ input {
   border-radius: 10px;
   border-color: teal;
   height: 1.5rem;
-  width: 15rem;
+  width: 12rem;
   border: 1px solid #ccc;
 }
 
@@ -98,4 +98,21 @@ li input[type="checkbox"] {
 
 #yes {
     background-color: #a40101;
+}
+.form-inputs select {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  height: 1.9rem;
+  width: 8rem;
+  padding: 2px 8px;
+  background-color: white;
+  font-size: 0.8rem;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-inputs select:focus {
+  border-color: #015959;
+  outline: none;
+  box-shadow: 0 0 5px rgba(1, 89, 89, 0.5);
 }

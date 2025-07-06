@@ -6,7 +6,17 @@ function ContactList({
   setSelectedContacts,
 }) {
   
+  const getAvatar = (contact) => {
+    if (contact.avatarUrl) return contact.avatarUrl;
+    if (contact.gender === "male")
+      return "https://avatar.iran.liara.run/public/boy";
+    if (contact.gender === "female")
+      return "https://avatar.iran.liara.run/public/77";
+    return `https://avatar.iran.liara.run/username?username=${contact.firstName}%20${contact.lastName}`;
+  };
   const handleSelect = (id) => {
+
+
     if (selectedContacts.includes(id)) {
       setSelectedContacts(
         selectedContacts.filter((selectedId) => selectedId !== id)
@@ -30,7 +40,15 @@ function ContactList({
                 checked={selectedContacts.includes(contact.id)}
                 onChange={() => handleSelect(contact.id)}
               />
-              <p>{contact.firstName} {contact.lastName}</p> {contact.email}
+              <img
+                src={getAvatar(contact)}
+                alt={`${contact.firstName} avatar`}
+                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+              />
+              <p>
+                {contact.firstName} {contact.lastName}
+              </p>{" "}
+              {contact.email}
               <section className="contact-btn">
                 <button onClick={() => onRequestDelete(contact)}>Delete</button>
                 <button onClick={() => onEditContact(contact)}>Edit</button>

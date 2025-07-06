@@ -1,19 +1,27 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 
-function ContactForm({ onAddContact, editableContact, onUpdateContact, showError }) {
+function ContactForm({
+  onAddContact,
+  editableContact,
+  onUpdateContact,
+  showError,
+}) {
   const [formData, setFormData] = useState({
+    avatarUrl: "",
     firstName: "",
     lastName: "",
     email: "",
+    gender: "",
   });
 
   useEffect(() => {
     if (editableContact) {
       setFormData({
-        firstName: editableContact.firstName,
-        lastName: editableContact.lastName,
-        email: editableContact.email,
+        firstName: editableContact.firstName || "",
+        lastName: editableContact.lastName || "",
+        email: editableContact.email || "",
+        gender: editableContact.gender || "",
+        avatarUrl: editableContact.avatarUrl || "",
       });
     }
   }, [editableContact]);
@@ -45,8 +53,6 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact, showError
 
     setFormData({ firstName: "", lastName: "", email: "" });
   };
-
-
 
   return (
     <form action="">
@@ -81,6 +87,17 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact, showError
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
+        <label htmlFor="gender">Gender:</label>
+        <select
+          id="gender"
+          value={formData.gender}
+          onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+        >
+          <option value="">Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
         <button type="submit" onClick={handleSubmit}>
           {editableContact ? "Update Contact" : "Add Contact"}
         </button>

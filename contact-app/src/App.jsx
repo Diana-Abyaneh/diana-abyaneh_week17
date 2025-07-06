@@ -19,7 +19,7 @@ function App() {
 
   const [successMessage, setSuccessMessage] = useState("");
 
-  const [pendingEditContact, setPendingEditContact] = useState("");
+  const [pendingEditContact, setPendingEditContact] = useState(null);
 
   const [errorMessages, setErrorMessages] = useState([]);
 
@@ -197,6 +197,7 @@ function App() {
           onCancel={() => {
             setPendingEditContact(null);
             setModalVisible(false);
+            setEditableContact(null);
           }}
         />
       )}
