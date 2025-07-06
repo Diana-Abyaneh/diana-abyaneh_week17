@@ -30,9 +30,11 @@ function ContactList({
                 checked={selectedContacts.includes(contact.id)}
                 onChange={() => handleSelect(contact.id)}
               />
-              {contact.firstName} {contact.lastName} - {contact.email}
-              <button onClick={() => onRequestDelete(contact)}>Delete</button>
-              <button onClick={() => onEditContact(contact)}>Edit</button>
+              <p>{contact.firstName} {contact.lastName}</p> {contact.email}
+              <section className="contact-btn">
+                <button onClick={() => onRequestDelete(contact)}>Delete</button>
+                <button onClick={() => onEditContact(contact)}>Edit</button>
+              </section>
             </li>
           ))}
         </ul>

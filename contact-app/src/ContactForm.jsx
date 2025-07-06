@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./contactForm.css"
 
 function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
   const [formData, setFormData] = useState({
@@ -25,6 +24,10 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
     if (!formData.firstName) newErrors.firstName = "First name is required!";
     if (!formData.lastName) newErrors.lastName = "Last name is required!";
     if (!formData.email) newErrors.email = "Email is required!";
+
+    {setTimeout(() => {
+          setErrors("")
+        }, 3000);}
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -61,7 +64,7 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
           setFormData({ ...formData, firstName: e.target.value })
         }
         />
-        {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
+
         <label htmlFor="lastName">Last name: </label>
         <input
           type="text"
@@ -70,7 +73,6 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
           value={formData.lastName}
           onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
         />
-        {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
 
         <label htmlFor="email">Email: </label>
         <input
@@ -79,13 +81,18 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
           id="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        />
+          />
+        <button type="submit" onClick={handleSubmit}>
+          {editableContact ? "Update Contact" : "Add Contact"}
+        </button>
       </div>
+      <section className="errors">
+        {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
+        {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        
+      </section>
       
-      {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-      <button type="submit" onClick={handleSubmit}>
-        {editableContact ? "Update Contact" : "Add Contact"}
-      </button>
     </form>
   );
 }

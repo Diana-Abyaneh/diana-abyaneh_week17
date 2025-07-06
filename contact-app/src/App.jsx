@@ -2,6 +2,7 @@ import { useState } from "react";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
+import "./App.css"
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -70,18 +71,20 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Contact App | <span>store your contacts</span> </h1>
+    <div className="container">
+      <h1 className="heading">Contact App | <span>store your contacts</span> </h1>
+      <section className="search-container">
+        <input
+          type="text"
+          placeholder="Search contacts..."
+          className="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </section>
       <hr />
       <br />
-
-      <input
-        type="text"
-        placeholder="Search contacts..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
+      
       <br />
       <br />
 
