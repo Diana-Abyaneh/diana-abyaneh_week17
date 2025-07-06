@@ -2,7 +2,7 @@ import { useState } from "react";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
-import "./App.css"
+import "./App.css";
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -19,6 +19,8 @@ function App() {
 
   const [successMessage, setSuccessMessage] = useState("");
 
+  const [pendingEditContact, setPendingEditContact] = useState("");
+
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
     setContacts([...contacts, newContactWithId]);
@@ -29,7 +31,8 @@ function App() {
   };
 
   const handleEditContact = (contact) => {
-    setEditableContact(contact);
+    setPendingEditContact(contact);
+    setModalVisible(true);
   };
 
   const handleUpdateContact = (updatedContact) => {
@@ -84,27 +87,28 @@ function App() {
       </section>
       <hr />
       <br />
-      
+
       <br />
       <br />
 
       {successMessage && (
-        <div style={{
-          position: "fixed",
-          top: "20px",
-          right: "20px",
-          backgroundColor: "#4caf50",
-          color: "white",
-          padding: "12px 20px",
-          borderRadius: "8px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-          zIndex: 1001,
-          transition: "opacity 0.3s ease-in-out"
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            backgroundColor: "#4caf50",
+            color: "white",
+            padding: "12px 20px",
+            borderRadius: "8px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            zIndex: 1001,
+            transition: "opacity 0.3s ease-in-out",
+          }}
+        >
           {successMessage}
         </div>
       )}
-
 
       <ContactForm
         onAddContact={handleAddContact}
@@ -123,7 +127,7 @@ function App() {
       <section className="bulk-btn">
         {filteredContacts.length > 0 && (
           <div>
-            <button onClick={handleToggleSelectAll} >
+            <button onClick={handleToggleSelectAll}>
               {selectedContacts.length === filteredContacts.length
                 ? "Unselect All"
                 : "Select All"}
@@ -135,6 +139,20 @@ function App() {
           <button onClick={handleBulkDeleteClick}>Delete Contacts</button>
         )}
       </section>
+      {modalVisible && pendingEditContact && (
+        <ConfirmModal
+          message={`Are you sure you want to edit ${pendingEditContact.firstName}?`}
+          onConfirm={() => {
+            setEditableContact(pendingEditContact);
+            setPendingEditContact(null);
+            setModalVisible(false);
+          }}
+          onCancel={() => {
+            setPendingEditContact(null);
+            setModalVisible(false);
+          }}
+        />
+      )}
 
       {modalVisible && (contactToDelete || isBulkDelete) && (
         <ConfirmModal
