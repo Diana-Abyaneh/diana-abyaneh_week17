@@ -21,6 +21,8 @@ function App() {
 
   const [pendingEditContact, setPendingEditContact] = useState("");
 
+  const [errorMessages, setErrorMessages] = useState([]);
+
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
     setContacts([...contacts, newContactWithId]);
@@ -73,6 +75,14 @@ function App() {
     }
   };
 
+  const showError = (messages) => {
+    setErrorMessages(messages);
+      setTimeout(() => {
+        setErrorMessages([]);
+      }, 3000);
+  };
+
+
   return (
     <div className="container">
       <h1 className="heading">Contact App</h1>
@@ -91,6 +101,7 @@ function App() {
       <br />
       <br />
 
+      
       {successMessage && (
         <div
           style={{
@@ -110,10 +121,32 @@ function App() {
         </div>
       )}
 
+      {errorMessages.length > 0 &&
+        errorMessages.map((message, index) => (
+          <div
+            key={index}
+            style={{
+              position: "fixed",
+              top: `${20 + index * 60}px`,
+              right: "20px",
+              backgroundColor: "#f44336",
+              color: "white",
+              padding: "12px 20px",
+              borderRadius: "8px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+              zIndex: 1001,
+              transition: "opacity 0.3s ease-in-out",
+            }}
+          >
+            {message}
+          </div>
+        ))}
+
       <ContactForm
         onAddContact={handleAddContact}
         editableContact={editableContact}
         onUpdateContact={handleUpdateContact}
+        showError={showError}
       />
 
       <ContactList

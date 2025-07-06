@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
+function ContactForm({ onAddContact, editableContact, onUpdateContact, showError }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,34 +21,21 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newErrors = {};
+    const newErrors = [];
 
-    if (!formData.firstName) newErrors.firstName = "First name is required!";
-    if (!formData.lastName) newErrors.lastName = "Last name is required!";
-    if (!formData.email) newErrors.email = "Email is required!";
+    if (!formData.firstName) newErrors.push("First name is required!");
+    if (!formData.lastName) newErrors.push("Last name is required!");
+    if (!formData.email) newErrors.push("Email is required!");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = "Email format is invalid!";
+      newErrors.push("Email format is invalid!");
     }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-
-      Object.keys(newErrors).forEach((key) => {
-        setTimeout(() => {
-          setErrors((prev) => {
-            const updated = { ...prev };
-            delete updated[key];
-            return updated;
-          });
-        }, 3000);
-      });
-
+    if (newErrors.length > 0) {
+      showError(newErrors);
       return;
     }
-
-    setErrors({});
 
     if (editableContact) {
       onUpdateContact({ ...formData, id: editableContact.id });
@@ -59,7 +46,7 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
     setFormData({ firstName: "", lastName: "", email: "" });
   };
 
-  const [errors, setErrors] = useState({});
+
 
   return (
     <form action="">
@@ -98,11 +85,6 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
           {editableContact ? "Update Contact" : "Add Contact"}
         </button>
       </div>
-      <section className="errors">
-        {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
-        {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
-        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-      </section>
     </form>
   );
 }
