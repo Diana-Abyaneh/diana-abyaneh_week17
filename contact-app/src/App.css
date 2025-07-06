@@ -2,22 +2,27 @@
   font-family: "Segoe UI", sans-serif;
 }
 
+body {
+    background: #283c86;
+    background: -webkit-linear-gradient(to right, #45a247, #283c86);
+    background: linear-gradient(to right, #45a247, #283c86); 
+}
+
 .container {
-  margin: 3rem 10rem;
+  margin: 3rem 9rem;
   border: none 1px;
   border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   min-height: 40rem;
+  background-color: rgba(255, 255, 255, 0.555);
+  
 }
 
 .heading {
   text-align: center;
 }
-span {
-  font-weight: 300;
-  color: teal;
-}
+
 
 .form-inputs {
   display: flex;
@@ -74,7 +79,7 @@ ul {
 li {
   padding: 8px;
   margin-bottom: 8px;
-  background-color: #f9f9f9;
+  background-color: #f9f9f9bc;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -86,4 +91,7 @@ li input[type="checkbox"] {
   width: 80px;
 }
 
-li button 
+.bulk-btn {
+    display: flex;
+    gap: 0.5rem;
+}

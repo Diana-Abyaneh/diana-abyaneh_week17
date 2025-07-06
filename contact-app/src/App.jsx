@@ -72,7 +72,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="heading">Contact App | <span>store your contacts</span> </h1>
+      <h1 className="heading">Contact App</h1>
       <section className="search-container">
         <input
           type="text"
@@ -108,20 +108,21 @@ function App() {
         selectedContacts={selectedContacts}
         setSelectedContacts={setSelectedContacts}
       />
+      <section className="bulk-btn">
+        {filteredContacts.length > 0 && (
+          <div>
+            <button onClick={handleToggleSelectAll} >
+              {selectedContacts.length === filteredContacts.length
+                ? "Unselect All"
+                : "Select All"}
+            </button>
+          </div>
+        )}
 
-      {filteredContacts.length > 0 && (
-        <div style={{ marginBottom: "10px" }}>
-          <button onClick={handleToggleSelectAll}>
-            {selectedContacts.length === filteredContacts.length
-              ? "Unselect All"
-              : "Select All"}
-          </button>
-        </div>
-      )}
-
-      {selectedContacts.length > 0 && (
-        <button onClick={handleBulkDeleteClick}>Delete Contacts</button>
-      )}
+        {selectedContacts.length > 0 && (
+          <button onClick={handleBulkDeleteClick}>Delete Contacts</button>
+        )}
+      </section>
 
       {modalVisible && (contactToDelete || isBulkDelete) && (
         <ConfirmModal
