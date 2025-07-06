@@ -95,3 +95,7 @@ li input[type="checkbox"] {
     display: flex;
     gap: 0.5rem;
 }
+
+#yes {
+    background-color: #a40101;
+}

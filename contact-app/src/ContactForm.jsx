@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./App.css";
 
 function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
   const [formData, setFormData] = useState({
@@ -19,15 +20,12 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newErrors = {};
 
     if (!formData.firstName) newErrors.firstName = "First name is required!";
     if (!formData.lastName) newErrors.lastName = "Last name is required!";
     if (!formData.email) newErrors.email = "Email is required!";
-
-    {setTimeout(() => {
-          setErrors("")
-        }, 3000);}
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -36,10 +34,22 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+
+      Object.keys(newErrors).forEach((key) => {
+        setTimeout(() => {
+          setErrors((prev) => {
+            const updated = { ...prev };
+            delete updated[key];
+            return updated;
+          });
+        }, 3000);
+      });
+
       return;
     }
 
     setErrors({});
+
     if (editableContact) {
       onUpdateContact({ ...formData, id: editableContact.id });
     } else {
@@ -56,13 +66,13 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
       <div className="form-inputs">
         <label htmlFor="firstName">First name: </label>
         <input
-        type="text"
-        name="firstName"
-        id="firstName"
-        value={formData.firstName}
-        onChange={(e) =>
-          setFormData({ ...formData, firstName: e.target.value })
-        }
+          type="text"
+          name="firstName"
+          id="firstName"
+          value={formData.firstName}
+          onChange={(e) =>
+            setFormData({ ...formData, firstName: e.target.value })
+          }
         />
 
         <label htmlFor="lastName">Last name: </label>
@@ -71,7 +81,9 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
           name="lastName"
           id="lastName"
           value={formData.lastName}
-          onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, lastName: e.target.value })
+          }
         />
 
         <label htmlFor="email">Email: </label>
@@ -81,7 +93,7 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
           id="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
+        />
         <button type="submit" onClick={handleSubmit}>
           {editableContact ? "Update Contact" : "Add Contact"}
         </button>
@@ -90,9 +102,7 @@ function ContactForm({ onAddContact, editableContact, onUpdateContact }) {
         {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
         {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
         {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-        
       </section>
-      
     </form>
   );
 }

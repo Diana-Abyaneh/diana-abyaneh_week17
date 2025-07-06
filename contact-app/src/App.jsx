@@ -89,10 +89,22 @@ function App() {
       <br />
 
       {successMessage && (
-        <div style={{ color: "green", marginBottom: "10px" }}>
+        <div style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          backgroundColor: "#4caf50",
+          color: "white",
+          padding: "12px 20px",
+          borderRadius: "8px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+          zIndex: 1001,
+          transition: "opacity 0.3s ease-in-out"
+        }}>
           {successMessage}
         </div>
       )}
+
 
       <ContactForm
         onAddContact={handleAddContact}
