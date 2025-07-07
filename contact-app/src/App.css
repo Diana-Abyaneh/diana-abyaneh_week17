@@ -83,14 +83,21 @@ li {
   border-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:space-between;
 }
 
 li input[type="checkbox"] {
   margin: 0;
   width: 80px;
 }
-
+.contact-name {
+  width:10rem;
+  text-align: center;
+}
+.contact-email {
+  width:15rem;
+  text-align: center;
+}
 .bulk-btn {
     display: flex;
     gap: 0.5rem;

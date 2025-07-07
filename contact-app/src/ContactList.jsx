@@ -45,10 +45,10 @@ function ContactList({
                 alt={`${contact.firstName} avatar`}
                 style={{ width: "50px", height: "50px", borderRadius: "50%" }}
               />
-              <p>
+              <p className="contact-name">
                 {contact.firstName} {contact.lastName}
               </p>{" "}
-              {contact.email}
+              <p className="contact-email">{contact.email}</p>
               <section className="contact-btn">
                 <button onClick={() => onRequestDelete(contact)}>Delete</button>
                 <button onClick={() => onEditContact(contact)}>Edit</button>
