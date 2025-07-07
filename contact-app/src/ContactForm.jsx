@@ -51,7 +51,7 @@ function ContactForm({
       onAddContact(formData);
     }
 
-    setFormData({ firstName: "", lastName: "", email: "" });
+  setFormData({ firstName: "", lastName: "", email: "", gender: "", avatarUrl: "" });
   };
 
   return (
