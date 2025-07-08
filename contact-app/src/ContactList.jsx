@@ -37,6 +37,7 @@ function ContactList({
             <li key={contact.id}>
               <input
                 type="checkbox"
+                id="checkbox"
                 checked={selectedContacts.includes(contact.id)}
                 onChange={() => handleSelect(contact.id)}
               />

@@ -116,9 +116,6 @@ function App() {
       <hr />
       <br />
 
-      <br />
-      <br />
-
       
       {successMessage && (
         <div

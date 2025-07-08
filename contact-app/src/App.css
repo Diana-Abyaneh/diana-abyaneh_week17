@@ -1,64 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+
 * {
-  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  font-family: 'Vazirmatn',"Segoe UI", sans-serif;
 }
 
 body {
-    background: #283c86;
-    background: -webkit-linear-gradient(to right, #45a247, #283c86);
-    background: linear-gradient(to right, #45a247, #283c86); 
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #45a247, #283c86);
+  min-height: 100vh;
 }
 
 .container {
-  margin: 2rem 7rem;
-  border: none 1px;
+  max-width: 1200px;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  min-height: 40rem;
-  background-color: rgba(255, 255, 255, 0.555);
-  
 }
 
 .heading {
   text-align: center;
-}
-
-
-.form-inputs {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 4rem;
-}
-
-input {
-  border-radius: 10px;
-  border-color: teal;
-  height: 1.5rem;
-  width: 12rem;
-  border: 1px solid #ccc;
-}
-
-label {
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-.search {
-  width: 60%;
-  height: 30px;
-  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 .search-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.search {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-inputs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
   align-items: center;
   margin: 2rem 0;
 }
+.form-inputs > div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.form-inputs input,
+.form-inputs select,
+.form-inputs button {
+  width: 120px;
+  height: 32px;
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
 
-button {
+.form-inputs button {
+  background-color: teal;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.form-inputs button:hover {
+  background-color: rgb(1, 89, 89);
+}
+
+.bulk-btn {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.bulk-btn button {
   margin: 5px;
   padding: 6px 12px;
   border: none;
@@ -67,59 +92,252 @@ button {
   border-radius: 6px;
   cursor: pointer;
 }
-button:hover {
+.bulk-btn button:hover {
   background-color: rgb(1, 89, 89);
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-
 li {
-  padding: 8px;
-  margin-bottom: 8px;
-  background-color: #f9f9f9bc;
-  border-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 8px;
+  background-color: rgba(249, 249, 249, 0.75);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+li img {
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.contact-name,
+.contact-email {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: 1rem;
+  text-align: left;
+}
+.contact-btn {
+  display: flex;
+  gap: 0.5rem;
+}
+.contact-btn button {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  background-color: teal;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.contact-btn button:hover {
+  background-color: rgb(1, 89, 89);
 }
 
-li input[type="checkbox"] {
-  margin: 0;
-  width: 80px;
+div[style*="rgba(0,0,0,0.6)"] button {
+  margin: 0 0.5rem;
+  padding: 6px 12px;
+  border: none;
+  background-color: teal;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
-.contact-name {
-  width:10rem;
-  text-align: center;
+div[style*="rgba(0,0,0,0.6)"] button:hover {
+  background-color: rgb(1, 89, 89);
 }
-.contact-email {
-  width:15rem;
-  text-align: center;
+#yes {
+  background-color: #a40101 !important;
 }
-.bulk-btn {
+
+@media (max-width: 1024px) {
+  .form-inputs {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .form-inputs input,
+  .form-inputs select,
+  .form-inputs button {
+    width: 100px;
+    height: 28px;
+    padding: 0 0.4rem;
+    font-size: 0.85rem;
+  }
+  li {
+    padding: 6px;
+    gap: 0.75rem;
+  }
+  li img {
+    width: 40px;
+    height: 40px;
+  }
+  .contact-name,
+  .contact-email {
+    font-size: 0.9rem;
+  }
+  .contact-btn button,
+  .bulk-btn button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 1.5rem;
+  }
+  .container {
+    padding: 15px;
+  }
+  .form-inputs {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .form-inputs > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 500px;
+  }
+  .form-inputs label {
+    flex: 0 0 auto;
+    font-size: 1rem;
+  }
+  .form-inputs input,
+  .form-inputs select,
+  .form-inputs button {
+    flex: 1 1 auto;
+    max-width: 70%;
+    height: 32px;
+    padding: 0.3rem;
+    font-size: 0.85rem;
+  }
+  .bulk-btn {
+    display: flex;
+    flex-direction: row;
+  }
+  .bulk-btn button {
+    width: 35vw;
+  }
+  li {
+    display: grid;
+    grid-template-columns: auto 50px 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "checkbox avatar name" "email email email" "buttons buttons buttons";
+    row-gap: 0.5rem;
+    padding: 10px;
+  }
+  li input[type="checkbox"] {
+    grid-area: checkbox;
+  }
+  li img {
+    grid-area: avatar;
+    width: 40px;
+    height: 40px;
+  }
+  .contact-name {
+    grid-area: name;
+    font-size: 1rem;
+  }
+  .contact-email {
+    grid-area: email;
+    font-size: 1rem;
+  }
+  .contact-btn {
+    grid-area: buttons;
     display: flex;
     gap: 0.5rem;
+  }
+  .contact-btn button {
+    padding: 10px 10px;
+    font-size: 0.8rem;
+  }
 }
 
-#yes {
+@media (max-width: 480px) {
+  .search {
+    width: 100%;
+  }
+  li img {
+    width: 32px;
+    height: 32px;
+  }
+  .form-inputs input,
+  .form-inputs select,
+  .form-inputs button {
+    flex: 1 1 auto;
+    max-width: 70%;
+    height: 32px;
+    padding: 0.3rem;
+    font-size: 0.85rem;
+  }
+  .contact-name,
+  .contact-email {
+    font-size: 0.85rem;
+  }
+  .contact-btn button,
+  .bulk-btn button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    min-width: 280px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+
+  .modal-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .modal-buttons button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: teal;
+    color: white;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .modal-buttons button:hover {
+    background-color: rgb(1, 89, 89);
+  }
+
+  .modal-buttons #yes {
     background-color: #a40101;
-}
-.form-inputs select {
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  height: 1.9rem;
-  width: 8rem;
-  padding: 2px 8px;
-  background-color: white;
-  font-size: 0.8rem;
-  color: #333;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-inputs select:focus {
-  border-color: #015959;
-  outline: none;
-  box-shadow: 0 0 5px rgba(1, 89, 89, 0.5);
+  }
 }
