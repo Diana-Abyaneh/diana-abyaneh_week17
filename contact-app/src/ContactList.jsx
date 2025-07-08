@@ -5,7 +5,6 @@ function ContactList({
   selectedContacts,
   setSelectedContacts,
 }) {
-  
   const getAvatar = (contact) => {
     if (contact.avatarUrl) return contact.avatarUrl;
     if (contact.gender === "male")
@@ -15,8 +14,6 @@ function ContactList({
     return `https://avatar.iran.liara.run/username?username=${contact.firstName}%20${contact.lastName}`;
   };
   const handleSelect = (id) => {
-
-
     if (selectedContacts.includes(id)) {
       setSelectedContacts(
         selectedContacts.filter((selectedId) => selectedId !== id)

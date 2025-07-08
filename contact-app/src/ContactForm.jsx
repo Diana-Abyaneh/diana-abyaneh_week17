@@ -105,7 +105,9 @@ function ContactForm({
           <select
             id="gender"
             value={formData.gender}
-            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, gender: e.target.value })
+            }
           >
             <option value="">Select gender</option>
             <option value="male">Male</option>

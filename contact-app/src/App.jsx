@@ -1,4 +1,4 @@
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
@@ -27,11 +27,11 @@ function App() {
 
   const handleAddContact = (newContact) => {
     const newContactWithId = { ...newContact, id: crypto.randomUUID() };
-    setContacts(prev => [...prev, newContactWithId]);
+    setContacts((prev) => [...prev, newContactWithId]);
   };
 
   const handleDeleteContact = (id) => {
-    setContacts(prev => prev.filter((contact) => contact.id !== id));
+    setContacts((prev) => prev.filter((contact) => contact.id !== id));
   };
 
   const handleEditContact = (contact) => {
@@ -44,7 +44,6 @@ function App() {
     setTimeout(() => setSuccessMessage(""), 3000);
   };
 
-
   const handleUpdateContact = (updatedContact) => {
     setContacts((prev) =>
       prev.map((contact) =>
@@ -53,8 +52,8 @@ function App() {
     );
     setEditableContact(null);
     showSuccess("Contact updated successfully!");
-  }
-  
+  };
+
   const handleDeleteClick = (contact) => {
     setContactToDelete(contact);
     setModalVisible(true);
@@ -82,9 +81,9 @@ function App() {
 
   const showError = (messages) => {
     setErrorMessages(messages);
-      setTimeout(() => {
-        setErrorMessages([]);
-      }, 3000);
+    setTimeout(() => {
+      setErrorMessages([]);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -116,7 +115,6 @@ function App() {
       <hr />
       <br />
 
-      
       {successMessage && (
         <div
           style={{
@@ -218,7 +216,6 @@ function App() {
               setSelectedContacts([]);
               setIsBulkDelete(false);
               showSuccess("Contacts deleted successfully!");
-
             } else {
               handleDeleteContact(contactToDelete.id);
               setContactToDelete(null);
