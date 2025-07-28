@@ -35,10 +35,6 @@ function HomePage() {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleDeleteContact = (id) => {
-    setContacts((prev) => prev.filter((contact) => contact.id !== id));
-  };
-
   const handleEditContact = (contact) => {
     setPendingEditContact(contact);
     setModalVisible(true);
@@ -77,11 +73,6 @@ function HomePage() {
     setIsLoaded(true);
   }, []);
 
-  useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-    }
-  }, [contacts, isLoaded]);
 
   return (
     <div className="container">
