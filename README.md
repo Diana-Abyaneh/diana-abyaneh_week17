@@ -29,10 +29,11 @@ JSON Server (local API)
 Clone the project
 
 ```bash
-git clone https://github.com/your-username/contact-app-api.git
-cd contact-app-api
-Install dependencies
+git clone https://github.com/Diana-Abyaneh/diana-abyaneh_week16.git
+cd diana-abyaneh_week16.git
 ```
+
+Install dependencies
 
 ```bash
 
