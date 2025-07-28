@@ -1,9 +1,12 @@
-import { ContactProvider } from "./context/ContactContext"
+import { ContactProvider } from "./context/ContactContext";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
-    <div></div>
-  )
+    <ContactProvider>
+      <HomePage />
+    </ContactProvider>
+  );
 }
 
-export default App
+export default App;

@@ -55,7 +55,6 @@ const deleteBulkContacts = (ids) => {
 };
 
 
-
   useEffect(() => {
     const stored = localStorage.getItem("contacts");
     if (stored) {
