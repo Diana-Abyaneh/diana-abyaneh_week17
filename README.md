@@ -43,7 +43,10 @@ Run the app:
 ```bash
 npm run dev
 ```
+
 No backend setup is needed — everything runs in your browser.
+
+
 ---
 
 ### 🧠 Architecture Comparison
