@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ContactContext } from "../context/ContactContext"
-
+import { ContactContext } from "../context/ContactContext";
 
 function ContactList({ onRequestDelete, onEditContact }) {
-  const { contacts, selectedContacts, setSelectedContacts } = useContext(ContactContext);
+  const { contacts, selectedContacts, setSelectedContacts, filteredContacts } =
+    useContext(ContactContext);
 
   const getAvatar = (contact) => {
     if (contact.avatarUrl) return contact.avatarUrl;
@@ -26,11 +26,11 @@ function ContactList({ onRequestDelete, onEditContact }) {
   return (
     <div>
       <h2>Contacts list</h2>
-      {contacts.length === 0 ? (
+      {filteredContacts.length === 0 ? (
         <p>No matching contact found.</p>
       ) : (
         <ul>
-          {contacts.map((contact) => (
+          {filteredContacts.map((contact) => (
             <li key={contact.id}>
               <input
                 type="checkbox"

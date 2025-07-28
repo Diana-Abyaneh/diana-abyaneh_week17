@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import { ContactContext } from "./context/ContactContext";
+import { ContactContext } from "../context/ContactContext";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
