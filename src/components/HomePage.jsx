@@ -11,10 +11,7 @@ function HomePage() {
   const {
     contacts,
     setContacts,
-    editableContact,
     setEditableContact,
-    showSuccess,
-    showError,
     successMessage,
     errorMessages,
     search,
@@ -23,7 +20,6 @@ function HomePage() {
     setSelectedContacts,
     deleteContact,
     deleteBulkContacts,
-    addContact,
   } = useContext(ContactContext);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -72,7 +68,6 @@ function HomePage() {
     }
     setIsLoaded(true);
   }, []);
-
 
   return (
     <div className="container">
@@ -132,6 +127,7 @@ function HomePage() {
       <ContactForm />
 
       <ContactList
+        contacts={filteredContacts}
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
       />

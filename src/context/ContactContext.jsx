@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
 
 const ContactContext = createContext();
 
@@ -10,6 +9,8 @@ function ContactProvider({ children }) {
   const [errorMessages, setErrorMessages] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedContacts, setSelectedContacts] = useState([]);
+  const [filteredContacts, setFilteredContacts] = useState([]);
+
 
   const showSuccess = (message) => {
     setSuccessMessage(message);
@@ -54,6 +55,15 @@ const deleteBulkContacts = (ids) => {
   showSuccess("Contacts deleted successfully!");
 };
 
+ useEffect(() => {
+    const filtered = contacts.filter((contact) => {
+      const fullText = `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
+      return fullText.includes(search.toLowerCase());
+    });
+    setFilteredContacts(filtered);
+  }, [contacts, search]);
+
+
 
   useEffect(() => {
     const stored = localStorage.getItem("contacts");
@@ -67,6 +77,7 @@ const deleteBulkContacts = (ids) => {
       value={{
         contacts,
         setContacts,
+        filteredContacts,
         editableContact,
         setEditableContact,
         successMessage,
