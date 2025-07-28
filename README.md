@@ -1,6 +1,8 @@
 ### 📇 Contact App (API Version)
 A React contact management application built using modern React architecture. This version uses JSON Server as a mock REST API to persist and manage contacts.
 
+---
+
 ### 🚀 Features
 ✅ Add, edit, and delete contacts
 
@@ -16,6 +18,8 @@ A React contact management application built using modern React architecture. Th
 
 ✅ Realistic HTTP requests using axios and JSON Server
 
+---
+
 ### 🧱 Tech Stack
 React
 
@@ -24,6 +28,8 @@ Context API
 Axios
 
 JSON Server (local API)
+
+---
 
 ### 🛠️ Setup Instructions
 Clone the project
@@ -60,6 +66,7 @@ Run the React app
 
 npm run dev
 ```
+---
 
 ### 🧠 Architecture Comparison
 
@@ -70,6 +77,8 @@ npm run dev
 | Deployability   | Needs API to be running          | Can deploy anywhere easily   |
 | Data Sync       | Cross-tab / multi-user           | Local to browser only        |
 
+---
+
 ### 🧩 Folder Highlights
 ```bash
 /src
@@ -78,8 +87,12 @@ npm run dev
   App.js           => Uses context to display and manage UI
 
   ```
+---
+
 ### 🌐 Notes
 You can use this project as a foundation to later connect to a real backend (Node.js, Firebase, Supabase, etc.)
+
+--- 
 
 ### ✒️ Author
 Diana Abyaneh
