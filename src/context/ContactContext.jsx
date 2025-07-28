@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const ContactContext = createContext();
 
@@ -25,78 +26,52 @@ function ContactProvider({ children }) {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      setContacts(data);
+      const response = await axios.get(API_URL);
+      setContacts(response.data);
     } catch (error) {
       showError(["Failed to fetch contacts"]);
     }
   };
 
-  useEffect(() => {
-    fetchContacts();
-  }, []);
-
   const addContact = async (newContact) => {
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newContact),
-      });
-      if (!res.ok) throw new Error("Failed to add contact");
-      const added = await res.json();
-      setContacts([...contacts, added]);
+      const response = await axios.post(API_URL, newContact);
+      setContacts([...contacts, response.data]);
       showSuccess("Contact added successfully!");
     } catch (error) {
-      showError([error.message]);
+      showError(["Failed to add contact"]);
     }
   };
 
   const updateContact = async (updatedContact) => {
     try {
-      const res = await fetch(`${API_URL}/${updatedContact.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedContact),
-      });
-      if (!res.ok) throw new Error("Failed to update contact");
-      const updated = await res.json();
+      await axios.put(`${API_URL}/${updatedContact.id}`, updatedContact);
       setContacts(
-        contacts.map((c) => (c.id === updated.id ? updated : c))
+        contacts.map((c) => (c.id === updatedContact.id ? updatedContact : c))
       );
       showSuccess("Contact updated successfully!");
     } catch (error) {
-      showError([error.message]);
+      showError(["Failed to update contact"]);
     }
   };
 
   const deleteContact = async (id) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Failed to delete contact");
+      await axios.delete(`${API_URL}/${id}`);
       setContacts(contacts.filter((c) => c.id !== id));
       showSuccess("Contact deleted successfully!");
     } catch (error) {
-      showError([error.message]);
+      showError(["Failed to delete contact"]);
     }
   };
 
   const deleteBulkContacts = async (ids) => {
     try {
-      await Promise.all(
-        ids.map((id) =>
-          fetch(`${API_URL}/${id}`, {
-            method: "DELETE",
-          })
-        )
-      );
+      await Promise.all(ids.map((id) => axios.delete(`${API_URL}/${id}`)));
       setContacts(contacts.filter((c) => !ids.includes(c.id)));
       showSuccess("Contacts deleted successfully!");
     } catch (error) {
-      showError(["Failed to delete some contacts"]);
+      showError(["Failed to delete contacts"]);
     }
   };
 
@@ -107,6 +82,10 @@ function ContactProvider({ children }) {
     });
     setFilteredContacts(filtered);
   }, [contacts, search]);
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
 
   return (
     <ContactContext.Provider
