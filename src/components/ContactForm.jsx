@@ -10,6 +10,8 @@ function ContactForm() {
     setContacts,
     showError,
     showSuccess,
+    addContact,
+    updateContact,
   } = useContext(ContactContext);
 
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ function ContactForm() {
     }
   }, [editableContact]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = [];
@@ -50,18 +52,11 @@ function ContactForm() {
       showError(newErrors);
       return;
     }
-
     if (editableContact) {
-      const updated = contacts.map((c) =>
-        c.id === editableContact.id ? { ...formData, id: c.id } : c
-      );
-      setContacts(updated);
+      await updateContact({ ...formData, id: editableContact.id });
       setEditableContact(null);
-      showSuccess("Contact updated successfully!");
     } else {
-      const newContact = { ...formData, id: crypto.randomUUID() };
-      setContacts([...contacts, newContact]);
-      showSuccess("Contact added successfully!");
+      await addContact(formData);
     }
 
     setFormData({

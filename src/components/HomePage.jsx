@@ -9,20 +9,22 @@ import "./App.css";
 
 function HomePage() {
   const {
-  contacts,
-  setContacts,
-  editableContact,
-  setEditableContact,
-  showSuccess,
-  showError,
-  successMessage,
-  errorMessages,
-  search,
-  setSearch,
-  selectedContacts,
-  setSelectedContacts,
-} = useContext(ContactContext);
-
+    contacts,
+    setContacts,
+    editableContact,
+    setEditableContact,
+    showSuccess,
+    showError,
+    successMessage,
+    errorMessages,
+    search,
+    setSearch,
+    selectedContacts,
+    setSelectedContacts,
+    deleteContact,
+    deleteBulkContacts,
+    addContact,
+  } = useContext(ContactContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
@@ -33,11 +35,6 @@ function HomePage() {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleAddContact = (newContact) => {
-    const newContactWithId = { ...newContact, id: crypto.randomUUID() };
-    setContacts((prev) => [...prev, newContactWithId]);
-  };
-
   const handleDeleteContact = (id) => {
     setContacts((prev) => prev.filter((contact) => contact.id !== id));
   };
@@ -45,16 +42,6 @@ function HomePage() {
   const handleEditContact = (contact) => {
     setPendingEditContact(contact);
     setModalVisible(true);
-  };
-
-  const handleUpdateContact = (updatedContact) => {
-    setContacts((prev) =>
-      prev.map((contact) =>
-        contact.id === updatedContact.id ? updatedContact : contact
-      )
-    );
-    setEditableContact(null);
-    showSuccess("Contact updated successfully!");
   };
 
   const handleDeleteClick = (contact) => {
@@ -195,18 +182,14 @@ function HomePage() {
               ? `Are you sure you want to delete ${selectedContacts.length} selected contacts?`
               : `Are you sure you want to delete ${contactToDelete.firstName}?`
           }
-          onConfirm={() => {
+          onConfirm={async () => {
             if (isBulkDelete) {
-              setContacts((prev) =>
-                prev.filter((contact) => !selectedContacts.includes(contact.id))
-              );
+              await deleteBulkContacts(selectedContacts);
               setSelectedContacts([]);
               setIsBulkDelete(false);
-              showSuccess("Contacts deleted successfully!");
             } else {
-              handleDeleteContact(contactToDelete.id);
+              await deleteContact(contactToDelete.id);
               setContactToDelete(null);
-              showSuccess("Contact deleted successfully!");
             }
             setModalVisible(false);
           }}
