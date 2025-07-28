@@ -21,69 +21,46 @@ function ContactProvider({ children }) {
     setTimeout(() => setErrorMessages([]), 3000);
   };
 
-  const addContact = async (newContact) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/contacts",
-        newContact
-      );
-      setContacts((prev) => [...prev, response.data]);
-      showSuccess("Contact added successfully!");
-    } catch (error) {
-      showError(["Failed to add contact"]);
-      console.error(error);
-    }
+  const addContact = (newContact) => {
+    const updatedContacts = [
+      ...contacts,
+      { ...newContact, id: crypto.randomUUID() },
+    ];
+    setContacts(updatedContacts);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+    showSuccess("Contact added successfully!");
   };
 
-  const updateContact = async (updatedContact) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:3001/contacts/${updatedContact.id}`,
-        updatedContact
-      );
-      setContacts((prev) =>
-        prev.map((c) => (c.id === updatedContact.id ? response.data : c))
-      );
-      showSuccess("Contact updated successfully!");
-    } catch (error) {
-      showError(["Failed to update contact"]);
-      console.error(error);
-    }
-  };
+  const updateContact = (updatedContact) => {
+  const updatedContacts = contacts.map((c) =>
+    c.id === updatedContact.id ? updatedContact : c
+  );
+  setContacts(updatedContacts);
+  localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+  showSuccess("Contact updated successfully!");
+};
 
-  const deleteContact = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3001/contacts/${id}`);
-      setContacts((prev) => prev.filter((c) => c.id !== id));
-      showSuccess("Contact deleted successfully!");
-    } catch (error) {
-      showError(["Failed to delete contact"]);
-      console.error(error);
-    }
-  };
+const deleteContact = (id) => {
+  const updatedContacts = contacts.filter((c) => c.id !== id);
+  setContacts(updatedContacts);
+  localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+  showSuccess("Contact deleted successfully!");
+};
 
-  const deleteBulkContacts = async (ids) => {
-  try {
-    await Promise.all(ids.map((id) => axios.delete(`http://localhost:3001/contacts/${id}`)));
-    setContacts((prev) => prev.filter((c) => !ids.includes(c.id)));
-    showSuccess("Contacts deleted successfully!");
-  } catch (error) {
-    showError(["Failed to delete selected contacts"]);
-    console.error(error);
-  }
+const deleteBulkContacts = (ids) => {
+  const updatedContacts = contacts.filter((c) => !ids.includes(c.id));
+  setContacts(updatedContacts);
+  localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+  showSuccess("Contacts deleted successfully!");
 };
 
 
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/contacts")
-      .then((response) => {
-        setContacts(response.data);
-      })
-      .catch((error) => {
-        showError(["Failed to load contacts from server"]);
-        console.error(error);
-      });
+    const stored = localStorage.getItem("contacts");
+    if (stored) {
+      setContacts(JSON.parse(stored));
+    }
   }, []);
 
   return (
