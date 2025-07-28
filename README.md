@@ -66,6 +66,7 @@ Run the React app
 
 npm run dev
 ```
+
 ---
 
 ### 🧠 Architecture Comparison
@@ -87,10 +88,11 @@ npm run dev
   App.js           => Uses context to display and manage UI
 
   ```
+
 ---
 
 ### 🔗 Live Demo
-🚀 [Try it here!](https://diana-abyaneh-week16.vercel.app/)
+🚀 [Try it here!](https://diana-abyaneh-week16-api.vercel.app/)
 
 ---
 
