@@ -1,12 +1,84 @@
-# React + Vite
+### 📇 Contact App (API Version)
+A React contact management application built using modern React architecture. This version uses JSON Server as a mock REST API to persist and manage contacts.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 🚀 Features
+✅ Add, edit, and delete contacts
 
-Currently, two official plugins are available:
+✅ Bulk delete selected contacts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ Search contacts by name or email
 
-## Expanding the ESLint configuration
+✅ Modal confirmations for delete/edit
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Form validation
+
+✅ Global state management using React Context
+
+✅ Realistic HTTP requests using axios and JSON Server
+
+### 🧱 Tech Stack
+React
+
+Context API
+
+Axios
+
+JSON Server (local API)
+
+### 🛠️ Setup Instructions
+Clone the project
+
+```bash
+git clone https://github.com/your-username/contact-app-api.git
+cd contact-app-api
+Install dependencies
+```
+
+```bash
+
+npm install
+```
+
+Start the JSON Server
+```bash
+
+npx json-server --watch db.json --port 3001
+```
+
+Make sure db.json file exists at the root and contains:
+
+```json
+{
+  "contacts": []
+}
+```
+
+Run the React app
+
+```bash
+
+npm run dev
+```
+
+### 🧠 Architecture Comparison
+
+| Feature         | API Version (JSON Server)        | LocalStorage Version         |
+|-----------------|----------------------------------|------------------------------|
+| Persistence     | Mock REST API via axios          | localStorage                 |
+| Realism         | Simulates real-world backend     | Pure frontend for testing    |
+| Deployability   | Needs API to be running          | Can deploy anywhere easily   |
+| Data Sync       | Cross-tab / multi-user           | Local to browser only        |
+
+### 🧩 Folder Highlights
+```bash
+/src
+  /context         => Handles all contact-related logic and HTTP requests
+  /components      => UI components (Form, List, Modal)
+  App.js           => Uses context to display and manage UI
+
+  ```
+### 🌐 Notes
+You can use this project as a foundation to later connect to a real backend (Node.js, Firebase, Supabase, etc.)
+
+### ✒️ Author
+Diana Abyaneh
