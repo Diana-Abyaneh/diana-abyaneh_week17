@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
+import { ContactContext } from "../context/ContactContext";
 
-
-function ContactForm({
-  onAddContact,
-  editableContact,
-  onUpdateContact,
-  showError,
-}) {
+function ContactForm() {
+  const {
+    editableContact,
+    setEditableContact,
+    contacts,
+    setContacts,
+    showError,
+    showSuccess,
+  } = useContext(ContactContext);
 
   const [formData, setFormData] = useState({
     avatarUrl: "",
@@ -49,9 +52,16 @@ function ContactForm({
     }
 
     if (editableContact) {
-      onUpdateContact({ ...formData, id: editableContact.id });
+      const updated = contacts.map((c) =>
+        c.id === editableContact.id ? { ...formData, id: c.id } : c
+      );
+      setContacts(updated);
+      setEditableContact(null);
+      showSuccess("Contact updated successfully!");
     } else {
-      onAddContact(formData);
+      const newContact = { ...formData, id: crypto.randomUUID() };
+      setContacts([...contacts, newContact]);
+      showSuccess("Contact added successfully!");
     }
 
     setFormData({

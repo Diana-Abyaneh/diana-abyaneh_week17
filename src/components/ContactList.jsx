@@ -1,10 +1,10 @@
-function ContactList({
-  contacts,
-  onRequestDelete,
-  onEditContact,
-  selectedContacts,
-  setSelectedContacts,
-}) {
+import { useContext } from "react";
+import { ContactContext } from "../context/ContactContext"
+
+
+function ContactList({ onRequestDelete, onEditContact }) {
+  const { contacts, selectedContacts, setSelectedContacts } = useContext(ContactContext);
+
   const getAvatar = (contact) => {
     if (contact.avatarUrl) return contact.avatarUrl;
     if (contact.gender === "male")

@@ -8,23 +8,28 @@ import ConfirmModal from "./ConfirmModal";
 import "./App.css";
 
 function HomePage() {
-  const {contacts, setContacts} = useContext(ContactContext);
+  const {
+  contacts,
+  setContacts,
+  editableContact,
+  setEditableContact,
+  showSuccess,
+  showError,
+  successMessage,
+  errorMessages,
+  search,
+  setSearch,
+  selectedContacts,
+  setSelectedContacts,
+} = useContext(ContactContext);
 
-  const {editableContact, setEditableContact } = useContext(ContactContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
 
-  const [selectedContacts, setSelectedContacts] = useState([]);
   const [isBulkDelete, setIsBulkDelete] = useState(false);
 
-  const [search, setSearch] = useState("");
-
-  const [successMessage, setSuccessMessage] = useState("");
-
   const [pendingEditContact, setPendingEditContact] = useState(null);
-
-  const [errorMessages, setErrorMessages] = useState([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -40,11 +45,6 @@ function HomePage() {
   const handleEditContact = (contact) => {
     setPendingEditContact(contact);
     setModalVisible(true);
-  };
-
-  const showSuccess = (message) => {
-    setSuccessMessage(message);
-    setTimeout(() => setSuccessMessage(""), 3000);
   };
 
   const handleUpdateContact = (updatedContact) => {
@@ -80,13 +80,6 @@ function HomePage() {
       const allVisibleIds = filteredContacts.map((contact) => contact.id);
       setSelectedContacts(allVisibleIds);
     }
-  };
-
-  const showError = (messages) => {
-    setErrorMessages(messages);
-    setTimeout(() => {
-      setErrorMessages([]);
-    }, 3000);
   };
 
   useEffect(() => {
@@ -158,20 +151,11 @@ function HomePage() {
           </div>
         ))}
 
-      <ContactForm
-        onAddContact={handleAddContact}
-        editableContact={editableContact}
-        onUpdateContact={handleUpdateContact}
-        showError={showError}
-      />
+      <ContactForm />
 
       <ContactList
-        contacts={filteredContacts}
-        onDeleteContact={handleDeleteContact}
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
-        selectedContacts={selectedContacts}
-        setSelectedContacts={setSelectedContacts}
       />
       <section className="bulk-btn">
         {filteredContacts.length > 0 && (
