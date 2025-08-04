@@ -2,10 +2,10 @@ import styles from "./confirmModal.module.css"
 
 function ConfirmModal({ message, onConfirm, onCancel }) {
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modal}>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
         <p>{message}</p>
-        <div style={styles.buttons}>
+        <div className={styles.buttons}>
           <button onClick={onConfirm} id="yes">
             Yes
           </button>

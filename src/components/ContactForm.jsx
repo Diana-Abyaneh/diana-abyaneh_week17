@@ -1,9 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Input from "./form/Input";
+import Select from "./form/Select";
 import styles from "./ContactForm.module.css";
 
 function ContactForm() {
+  const contactSchema = yup.object({
+    firstName: yup.string().required("First name is required"),
+    lastName: yup.string().required("Last name is required"),
+    email: yup
+      .string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    gender: yup.string().notRequired(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(contactSchema),
+  });
+
   const {
     editableContact,
     setEditableContact,
@@ -12,116 +37,68 @@ function ContactForm() {
     updateContact,
   } = useContext(ContactContext);
 
-  const [formData, setFormData] = useState({
-    avatarUrl: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-  });
-
   useEffect(() => {
     if (editableContact) {
-      setFormData({
-        firstName: editableContact.firstName || "",
-        lastName: editableContact.lastName || "",
-        email: editableContact.email || "",
-        gender: editableContact.gender || "",
-        avatarUrl: editableContact.avatarUrl || "",
-      });
+      setValue("firstName", editableContact.firstName || "");
+      setValue("lastName", editableContact.lastName || "");
+      setValue("email", editableContact.email || "");
+      setValue("gender", editableContact.gender || "");
     }
-  }, [editableContact]);
+  }, [editableContact, setValue]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const newErrors = [];
-
-    if (!formData.firstName) newErrors.push("First name is required!");
-    if (!formData.lastName) newErrors.push("Last name is required!");
-    if (!formData.email) newErrors.push("Email is required!");
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (formData.email && !emailRegex.test(formData.email)) {
-      newErrors.push("Email format is invalid!");
-    }
-
-    if (newErrors.length > 0) {
-      showError(newErrors);
-      return;
-    }
+  const onSubmit = async (data) => {
     if (editableContact) {
-      await updateContact({ ...formData, id: editableContact.id });
+      await updateContact({ ...data, id: editableContact.id });
       setEditableContact(null);
     } else {
-      await addContact(formData);
+      await addContact(data);
     }
-
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      gender: "",
-      avatarUrl: "",
-    });
+    reset();
   };
 
   return (
-    <form action="">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.formInputs}>
         <div>
-          <label htmlFor="firstName">First name: </label>
-          <input
-            type="text"
+          <Input
+            label="First Name"
             name="firstName"
-            id="firstName"
-            value={formData.firstName}
-            onChange={(e) =>
-              setFormData({ ...formData, firstName: e.target.value })
-            }
+            register={register}
+            error={errors.firstName}
           />
         </div>
 
         <div>
-          <label htmlFor="lastName">Last name: </label>
-          <input
-            type="text"
+          <Input
+            label="Last Name"
             name="lastName"
-            id="lastName"
-            value={formData.lastName}
-            onChange={(e) =>
-              setFormData({ ...formData, lastName: e.target.value })
-            }
+            register={register}
+            error={errors.lastName}
           />
         </div>
         <div>
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
+          <Input
+            label="Email"
             name="email"
-            id="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            type="email"
+            register={register}
+            error={errors.email}
           />
         </div>
         <div>
-          <label htmlFor="gender">Gender:</label>
-          <select
-            id="gender"
-            value={formData.gender}
-            onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
-            }
-          >
-            <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
+          <Select
+            label="Gender"
+            name="gender"
+            register={register}
+            error={errors.gender}
+            options={[
+              { value: "male", label: "Male" },
+              { value: "female", label: "Female" },
+            ]}
+          />
         </div>
 
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit">
           {editableContact ? "Update Contact" : "Add Contact"}
         </button>
       </div>
