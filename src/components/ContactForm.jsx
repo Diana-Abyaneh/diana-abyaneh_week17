@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
+import styles from "./ContactForm.module.css";
 
 function ContactForm() {
   const {
@@ -67,7 +68,7 @@ function ContactForm() {
 
   return (
     <form action="">
-      <div className="form-inputs">
+      <div className={styles.formInputs}>
         <div>
           <label htmlFor="firstName">First name: </label>
           <input

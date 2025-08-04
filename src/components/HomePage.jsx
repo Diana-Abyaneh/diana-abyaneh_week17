@@ -4,8 +4,8 @@ import { ContactContext } from "../context/ContactContext";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
+import styles from "./HomePage.module.css"
 
-import "./App.css";
 
 function HomePage() {
   const {
@@ -70,13 +70,13 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="container">
-      <h1 className="heading">Contact App</h1>
-      <section className="search-container">
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Contact App</h1>
+      <section className={styles.searchContainer}>
         <input
           type="text"
           placeholder="Search contacts..."
-          className="search"
+          className={styles.search}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -86,18 +86,7 @@ function HomePage() {
 
       {successMessage && (
         <div
-          style={{
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            backgroundColor: "#4caf50",
-            color: "white",
-            padding: "12px 20px",
-            borderRadius: "8px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-            zIndex: 1001,
-            transition: "opacity 0.3s ease-in-out",
-          }}
+          className={styles.successMessage}
         >
           {successMessage}
         </div>
@@ -107,18 +96,7 @@ function HomePage() {
         errorMessages.map((message, index) => (
           <div
             key={index}
-            style={{
-              position: "fixed",
-              top: `${20 + index * 60}px`,
-              right: "20px",
-              backgroundColor: "#f44336",
-              color: "white",
-              padding: "12px 20px",
-              borderRadius: "8px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-              zIndex: 1001,
-              transition: "opacity 0.3s ease-in-out",
-            }}
+            className={styles.errorMessage}
           >
             {message}
           </div>
