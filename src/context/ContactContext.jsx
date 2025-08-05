@@ -13,15 +13,8 @@ function ContactProvider({ children }) {
 
   const API_URL = "http://localhost:3001/contacts";
 
-  const showSuccess = (message) => {
-    setSuccessMessage(message);
-    setTimeout(() => setSuccessMessage(""), 3000);
-  };
-
-  const showError = (messages) => {
-    setErrorMessages(messages);
-    setTimeout(() => setErrorMessages([]), 3000);
-  };
+  const { successMessage, errorMessages, showSuccess, showError } =
+    useNotifications();
 
   const fetchContacts = async () => {
     try {
@@ -76,7 +69,8 @@ function ContactProvider({ children }) {
 
   useEffect(() => {
     const filtered = contacts.filter((contact) => {
-      const fullText = `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
+      const fullText =
+        `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
       return fullText.includes(search.toLowerCase());
     });
     setFilteredContacts(filtered);
