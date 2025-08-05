@@ -1,46 +1,40 @@
 ### 📇 Contact App (API Version)
-A React contact management application built using modern React architecture. This version uses JSON Server as a mock REST API to persist and manage contacts.
+
+A React contact management application built using modern React architecture.  
+This version uses **JSON Server** as a mock REST API to persist and manage contacts.
 
 ---
 
 ### 🚀 Features
-✅ Add, edit, and delete contacts
 
-✅ Bulk delete selected contacts
-
-✅ Search contacts by name or email
-
-✅ Modal confirmations for delete/edit
-
-✅ Form validation
-
-✅ Global state management using React Context
-
-✅ Realistic HTTP requests using axios and JSON Server
-
+✅ Add, edit, and delete contacts  
+✅ Bulk delete selected contacts  
+✅ Search contacts by name or email  
+✅ Modal confirmations for delete/edit  
+✅ Form validation (`yup` + `react-hook-form`)  
+✅ Global state management using React Context  
+✅ Realistic HTTP requests using `axios` and `JSON Server`
 
 ---
 
 ### 🧱 Tech Stack
 
-React
-
-Context API
-
-Axios
-
-JSON Server (local API)
-
+- React  
+- Context API  
+- Axios  
+- JSON Server (local REST API)  
+- Yup (validation)  
+- React Hook Form (form management)
 
 ---
 
 ### 🛠️ Setup Instructions
 
-Clone the project
+#### 1. Clone the project
 
 ```bash
 git clone https://github.com/Diana-Abyaneh/diana-abyaneh_week17.git
-cd diana-abyaneh_week17.git
+cd diana-abyaneh_week17
 ```
 
 Install dependencies
@@ -71,7 +65,6 @@ Run the React app
 npm run dev
 ```
 
-
 ---
 
 ### 🧠 Architecture Comparison
@@ -87,11 +80,16 @@ npm run dev
 
 ### 🧩 Folder Highlights
 ```bash
-/src
-  /context         => Handles all contact-related logic and HTTP requests
-  /components      => UI components (Form, List, Modal)
-  App.js           => Uses context to display and manage UI
-
+/
+├── db.json            # Mock database file for JSON Server
+├── package.json       # Project metadata and dependencies
+├── vite.config.js     # Vite config
+└── /src
+    ├── /components    # UI components (Form, List, Modal, etc.)
+    ├── /context       # Global state and API logic for contacts
+    ├── /utils         # Custom hooks and helpers (notifications, form logic)
+    ├── App.jsx        # Root component
+    └── main.jsx       # Entry point for rendering app
   ```
 
 ---
