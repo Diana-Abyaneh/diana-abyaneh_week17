@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import Notifications from "../utils/notifications";
 
 const ContactContext = createContext();
 
@@ -10,17 +11,6 @@ function ContactProvider({ children }) {
   const [search, setSearch] = useState("");
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState([]);
-
-
-  const showSuccess = (message) => {
-    setSuccessMessage(message);
-    setTimeout(() => setSuccessMessage(""), 3000);
-  };
-
-  const showError = (messages) => {
-    setErrorMessages(messages);
-    setTimeout(() => setErrorMessages([]), 3000);
-  };
 
   const addContact = (newContact) => {
     const updatedContacts = [

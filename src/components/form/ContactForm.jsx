@@ -68,16 +68,6 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.formInputs}>
-        {Object.values(errors).map((error, index) => (
-          <div
-            key={index}
-            className={styles.errorToast}
-            style={{ top: `${20 + index * 60}px` }}
-          >
-            {error.message}
-          </div>
-        ))}
-
         <div>
           <Input
             label="First Name"

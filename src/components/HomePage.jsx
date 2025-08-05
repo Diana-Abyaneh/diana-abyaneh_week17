@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
-import ContactForm from "./ContactForm";
+import ContactForm from "./form/ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
 import styles from "./HomePage.module.css";
