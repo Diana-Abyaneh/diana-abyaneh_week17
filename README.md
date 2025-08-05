@@ -18,9 +18,11 @@ A React contact management application built using modern React architecture. Th
 
 ✅ Realistic HTTP requests using axios and JSON Server
 
+
 ---
 
 ### 🧱 Tech Stack
+
 React
 
 Context API
@@ -29,9 +31,11 @@ Axios
 
 JSON Server (local API)
 
+
 ---
 
 ### 🛠️ Setup Instructions
+
 Clone the project
 
 ```bash
@@ -66,6 +70,7 @@ Run the React app
 
 npm run dev
 ```
+
 
 ---
 

@@ -1,0 +1,33 @@
+.fieldGroup {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.input,
+.select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.select:focus {
+  border-color: teal;
+  outline: none;
+}
+
+.error {
+  color: #ef4444; 
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  min-height: 1em;
+}

@@ -1,0 +1,64 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  min-width: 320px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: teal;
+  color: white;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+  background-color: rgb(1, 89, 89);
+}
+
+.buttons #yes {
+  background-color: #a40101;
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+    min-width: 280px;
+    max-width: 90%;
+  }
+  
+  .buttons {
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+  
+  .buttons button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}

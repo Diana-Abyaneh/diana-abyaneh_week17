@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { useNotifications } from "../utils/useNotifications.js";
 import axios from "axios";
 
 const ContactContext = createContext();
@@ -6,8 +7,6 @@ const ContactContext = createContext();
 function ContactProvider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [editableContact, setEditableContact] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessages, setErrorMessages] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState([]);

@@ -1,0 +1,117 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 8px;
+  background-color: rgba(249, 249, 249, 0.75);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+li img {
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.contactName,
+.contactEmail {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: 1rem;
+  text-align: left;
+}
+.contactBtn {
+  display: flex;
+  gap: 0.5rem;
+}
+.contactBtn button {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  background-color: teal;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.contactBtn button:hover {
+  background-color: rgb(1, 89, 89);
+}
+
+@media (max-width: 1024px) {
+  li {
+    padding: 6px;
+    gap: 0.75rem;
+  }
+  li img {
+    width: 40px;
+    height: 40px;
+  }
+  .contactName,
+  .contactEmail {
+    font-size: 0.9rem;
+  }
+  .contactBtn button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  li {
+    display: grid;
+    grid-template-columns: auto 50px 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "checkbox avatar name" "email email email" "buttons buttons buttons";
+    row-gap: 0.5rem;
+    padding: 10px;
+  }
+  li input[type="checkbox"] {
+    grid-area: checkbox;
+  }
+  li img {
+    grid-area: avatar;
+    width: 40px;
+    height: 40px;
+  }
+  .contactName {
+    grid-area: name;
+    font-size: 1rem;
+  }
+  .contactEmail {
+    grid-area: email;
+    font-size: 1rem;
+  }
+  .contactBtn {
+    grid-area: buttons;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .contactBtn button {
+    padding: 10px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  li img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .contactName,
+  .contactEmail {
+    font-size: 0.85rem;
+  }
+  .contactBtn button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}

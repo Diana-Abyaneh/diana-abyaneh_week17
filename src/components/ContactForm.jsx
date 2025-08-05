@@ -6,10 +6,7 @@ function ContactForm() {
   const {
     editableContact,
     setEditableContact,
-    contacts,
-    setContacts,
     showError,
-    showSuccess,
     addContact,
     updateContact,
   } = useContext(ContactContext);
