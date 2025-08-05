@@ -96,11 +96,6 @@ npm run dev
 
 ---
 
-### 🔗 Live Demo
-🚀 [Try it here!](https://diana-abyaneh-week16-api.vercel.app/)
-
----
-
 ### 🌐 Notes
 You can use this project as a foundation to later connect to a real backend (Node.js, Firebase, Supabase, etc.)
 
