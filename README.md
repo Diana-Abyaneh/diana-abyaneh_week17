@@ -1,46 +1,34 @@
-### 📇 Contact App (API Version)
-A React contact management application built using modern React architecture. This version uses JSON Server as a mock REST API to persist and manage contacts.
+### 📇 Contact App (Local Storage Version)
+A React contact management application built using modern React architecture. This version stores data entirely in the browser using **localStorage** without any need for backend or server setup.
 
 ---
 
 ### 🚀 Features
-✅ Add, edit, and delete contacts
-
-✅ Bulk delete selected contacts
-
-✅ Search contacts by name or email
-
-✅ Modal confirmations for delete/edit
-
-✅ Form validation
-
-✅ Global state management using React Context
-
-✅ Realistic HTTP requests using axios and JSON Server
-
+✅ Add, edit, and delete contacts  
+✅ Bulk delete selected contacts  
+✅ Search contacts by name or email  
+✅ Modal confirmations for delete/edit  
+✅ Form validation  
+✅ Global state management using React Context  
+✅ Data persists across page refreshes using `localStorage`  
 
 ---
 
 ### 🧱 Tech Stack
 
-React
-
-Context API
-
-Axios
-
-JSON Server (local API)
-
+React  
+Context API  
+localStorage  
 
 ---
 
 ### 🛠️ Setup Instructions
 
-Clone the project
+Clone the project:
 
 ```bash
-git clone https://github.com/Diana-Abyaneh/diana-abyaneh_week16.git
-cd diana-abyaneh_week16.git
+git clone https://github.com/Diana-Abyaneh/diana-abyaneh_week17.git
+cd diana-abyaneh_week17
 ```
 
 Install dependencies
@@ -50,20 +38,6 @@ Install dependencies
 npm install
 ```
 
-Start the JSON Server
-```bash
-
-npx json-server --watch db.json --port 3001
-```
-
-Make sure db.json file exists at the root and contains:
-
-```json
-{
-  "contacts": []
-}
-```
-
 Run the React app
 
 ```bash
@@ -71,6 +45,7 @@ Run the React app
 npm run dev
 ```
 
+No server or API setup needed — all data is stored in your browser using localStorage.
 
 ---
 
@@ -88,17 +63,12 @@ npm run dev
 ### 🧩 Folder Highlights
 ```bash
 /src
-  /context         => Handles all contact-related logic and HTTP requests
-  /components      => UI components (Form, List, Modal)
-  App.js           => Uses context to display and manage UI
-
+  /components       => UI components (Form, List, Modal, etc.)
+  /context          => Global state and data logic (contacts)
+  /utils            => Helpers (e.g. form logic, toast system)
+  App.jsx           => Main app component
+  main.jsx          => Entry point for ReactDOM
   ```
-
----
-
-### 🔗 Live Demo
-🚀 [Try it here!](https://diana-abyaneh-week16-api.vercel.app/)
-
 ---
 
 ### 🌐 Notes
