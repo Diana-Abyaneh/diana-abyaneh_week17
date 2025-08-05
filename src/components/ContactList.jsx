@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
 
+import styles from "./ContactList.module.css"
+
 function ContactList({ onRequestDelete, onEditContact }) {
-  const { contacts, selectedContacts, setSelectedContacts, filteredContacts } =
+  const { selectedContacts, setSelectedContacts, filteredContacts } =
+
     useContext(ContactContext);
 
   const getAvatar = (contact) => {
@@ -34,20 +37,19 @@ function ContactList({ onRequestDelete, onEditContact }) {
             <li key={contact.id}>
               <input
                 type="checkbox"
-                id="checkbox"
                 checked={selectedContacts.includes(contact.id)}
                 onChange={() => handleSelect(contact.id)}
               />
               <img
                 src={getAvatar(contact)}
-                alt={`${contact.firstName} avatar`}
-                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                alt={`${contact.firstName}'s avatar`}
               />
-              <p className="contact-name">
+              <p className={styles.contactName}>
                 {contact.firstName} {contact.lastName}
               </p>{" "}
-              <p className="contact-email">{contact.email}</p>
-              <section className="contact-btn">
+              <p className={styles.contactEmail}>{contact.email}</p>
+              <section className={styles.contactBtn}>
+
                 <button onClick={() => onRequestDelete(contact)}>Delete</button>
                 <button onClick={() => onEditContact(contact)}>Edit</button>
               </section>

@@ -1,0 +1,19 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.search {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  .search {
+    width: 100%;
+  }
+}
