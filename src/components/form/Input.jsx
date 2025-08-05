@@ -7,7 +7,6 @@ function Input({ label, name, type = "text", register, error }) {
         {label}
       </label>
       <input id={name} type={type} {...register(name)} className={styles.input} />
-      {error && <p className={styles.error}>{error.message}</p>}
     </div>
   );
 }

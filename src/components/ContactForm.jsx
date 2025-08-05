@@ -23,28 +23,32 @@ function ContactForm() {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(contactSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      gender: "",
+    },
   });
 
-  const {
-    editableContact,
-    setEditableContact,
-    showError,
-    addContact,
-    updateContact,
-  } = useContext(ContactContext);
+  const { editableContact, setEditableContact, addContact, updateContact } =
+    useContext(ContactContext);
 
   useEffect(() => {
     if (editableContact) {
-      setValue("firstName", editableContact.firstName || "");
-      setValue("lastName", editableContact.lastName || "");
-      setValue("email", editableContact.email || "");
-      setValue("gender", editableContact.gender || "");
+      reset({
+        firstName: editableContact.firstName || "",
+        lastName: editableContact.lastName || "",
+        email: editableContact.email || "",
+        gender: editableContact.gender || "",
+      });
+    } else {
+      reset();
     }
-  }, [editableContact, setValue]);
+  }, [editableContact, reset]);
 
   const onSubmit = async (data) => {
     if (editableContact) {
@@ -59,6 +63,16 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.formInputs}>
+        {Object.values(errors).map((error, index) => (
+          <div
+            key={index}
+            className={styles.errorToast}
+            style={{ top: `${20 + index * 60}px` }}
+          >
+            {error.message}
+          </div>
+        ))}
+
         <div>
           <Input
             label="First Name"

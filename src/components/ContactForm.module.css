@@ -33,6 +33,20 @@
   background-color: rgb(1, 89, 89);
 }
 
+.errorToast {
+  position: fixed;
+  right: 20px;
+  background-color: #f44336;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  transition: opacity 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+
 @media (max-width: 1024px) {
   .form-inputs {
     flex-wrap: wrap;
