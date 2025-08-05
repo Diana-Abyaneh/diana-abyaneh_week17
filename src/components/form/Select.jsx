@@ -14,7 +14,6 @@ function Select({ label, name, register, options = [], error }) {
           </option>
         ))}
       </select>
-      {error && <p className={styles.error}>{error.message}</p>}
     </div>
   );
 }

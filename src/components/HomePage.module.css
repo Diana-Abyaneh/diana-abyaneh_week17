@@ -14,7 +14,7 @@
   margin-bottom: 1rem;
 }
 
-.search-container {
+.searchContainer {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
@@ -43,7 +43,6 @@
 
 .errorMessage {
   position: fixed;
-  top: calc(20 + index * 60);
   right: 20px;
   background-color: #f44336;
   color: white;
@@ -54,13 +53,13 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.bulk-btn {
+.bulkBtn {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
   margin: 1rem 0;
 }
-.bulk-btn button {
+.bulkBtn button {
   margin: 5px;
   padding: 6px 12px;
   border: none;
@@ -69,14 +68,14 @@
   border-radius: 6px;
   cursor: pointer;
 }
-.bulk-btn button:hover {
+.bulkBtn button:hover {
   background-color: rgb(1, 89, 89);
 }
 
 
 
 @media (max-width: 1024px) {
-  .bulk-btn button {
+  .bulkBtn button {
     padding: 5px 10px;
     font-size: 0.8rem;
   }
@@ -90,11 +89,11 @@
     padding: 15px;
   }
 
-  .bulk-btn {
+  .bulkBtn {
     display: flex;
     flex-direction: row;
   }
-  .bulk-btn button {
+  .bulkBtn button {
     width: 35vw;
   }
 
@@ -105,7 +104,7 @@
     width: 100%;
   }
  
-  .bulk-btn button {
+  .bulkBtn button {
     padding: 4px 8px;
     font-size: 0.8rem;
   }

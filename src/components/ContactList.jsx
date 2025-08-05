@@ -3,7 +3,7 @@ import { ContactContext } from "../context/ContactContext";
 import styles from "./ContactList.module.css"
 
 function ContactList({ onRequestDelete, onEditContact }) {
-  const { contacts, selectedContacts, setSelectedContacts, filteredContacts } =
+  const { selectedContacts, setSelectedContacts, filteredContacts } =
     useContext(ContactContext);
 
   const getAvatar = (contact) => {
@@ -35,7 +35,6 @@ function ContactList({ onRequestDelete, onEditContact }) {
             <li key={contact.id}>
               <input
                 type="checkbox"
-                id="checkbox"
                 checked={selectedContacts.includes(contact.id)}
                 onChange={() => handleSelect(contact.id)}
               />

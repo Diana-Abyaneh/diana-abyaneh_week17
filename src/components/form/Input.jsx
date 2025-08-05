@@ -1,6 +1,6 @@
 import styles from "./Input.module.css";
 
-function Input({ label, name, type = "text", register, error }) {
+function Input({ label, name, type = "text", register }) {
   return (
     <div className={styles.inputGroup}>
       <label htmlFor={name} className={styles.label}>

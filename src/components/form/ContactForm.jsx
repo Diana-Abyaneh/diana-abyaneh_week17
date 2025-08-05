@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useContext } from "react";
-import { ContactContext } from "../context/ContactContext";
+import { ContactContext } from "../../context/ContactContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Input from "./form/Input";
-import Select from "./form/Select";
+import Input from "./Input";
+import Select from "./Select";
 import styles from "./ContactForm.module.css";
 
 function ContactForm() {
@@ -46,7 +46,12 @@ function ContactForm() {
         gender: editableContact.gender || "",
       });
     } else {
-      reset();
+      reset({
+        firstName: "",
+        lastName: "",
+        email: "",
+        gender: "",
+      });
     }
   }, [editableContact, reset]);
 

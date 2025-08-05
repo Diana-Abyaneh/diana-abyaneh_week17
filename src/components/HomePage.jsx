@@ -4,12 +4,10 @@ import { ContactContext } from "../context/ContactContext";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
-import styles from "./HomePage.module.css"
-
+import styles from "./HomePage.module.css";
 
 function HomePage() {
   const {
-    contacts,
     setContacts,
     setEditableContact,
     successMessage,
@@ -20,6 +18,7 @@ function HomePage() {
     setSelectedContacts,
     deleteContact,
     deleteBulkContacts,
+    filteredContacts,
   } = useContext(ContactContext);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -45,12 +44,6 @@ function HomePage() {
     setIsBulkDelete(true);
     setModalVisible(true);
   };
-
-  const filteredContacts = contacts.filter((contact) => {
-    const fullText =
-      `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
-    return fullText.includes(search.toLowerCase());
-  });
 
   const handleToggleSelectAll = () => {
     if (selectedContacts.length === filteredContacts.length)
@@ -85,11 +78,7 @@ function HomePage() {
       <br />
 
       {successMessage && (
-        <div
-          className={styles.successMessage}
-        >
-          {successMessage}
-        </div>
+        <div className={styles.successMessage}>{successMessage}</div>
       )}
 
       {errorMessages.length > 0 &&
@@ -97,6 +86,7 @@ function HomePage() {
           <div
             key={index}
             className={styles.errorMessage}
+            style={{ top: `${20 + index * 60}px` }}
           >
             {message}
           </div>
@@ -109,7 +99,7 @@ function HomePage() {
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
       />
-      <section className="bulk-btn">
+      <section className={styles.bulkBtn}>
         {filteredContacts.length > 0 && (
           <div>
             <button onClick={handleToggleSelectAll}>
@@ -131,6 +121,7 @@ function HomePage() {
             setEditableContact(pendingEditContact);
             setPendingEditContact(null);
             setModalVisible(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           onCancel={() => {
             setPendingEditContact(null);
