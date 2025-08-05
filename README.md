@@ -1,5 +1,5 @@
-### 📇 Contact App (API Version)
-A React contact management application built using modern React architecture. This version uses JSON Server as a mock REST API to persist and manage contacts.
+### 📇 Contact App (Local storage version)
+A React contact management application built using modern React architecture. This version of the Contact List App stores all data locally using the browser's **localStorage**, without relying on any external API.
 
 ---
 
