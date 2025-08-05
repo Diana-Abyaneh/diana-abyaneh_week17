@@ -1,13 +1,11 @@
 import { createContext, useState, useEffect } from "react";
-import Notifications from "../utils/notifications";
+import { useNotifications } from "../utils/useNotifications";
 
 const ContactContext = createContext();
 
 function ContactProvider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [editableContact, setEditableContact] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessages, setErrorMessages] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState([]);
@@ -23,37 +21,39 @@ function ContactProvider({ children }) {
   };
 
   const updateContact = (updatedContact) => {
-  const updatedContacts = contacts.map((c) =>
-    c.id === updatedContact.id ? updatedContact : c
-  );
-  setContacts(updatedContacts);
-  localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-  showSuccess("Contact updated successfully!");
-};
+    const updatedContacts = contacts.map((c) =>
+      c.id === updatedContact.id ? updatedContact : c
+    );
+    setContacts(updatedContacts);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+    showSuccess("Contact updated successfully!");
+  };
 
-const deleteContact = (id) => {
-  const updatedContacts = contacts.filter((c) => c.id !== id);
-  setContacts(updatedContacts);
-  localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-  showSuccess("Contact deleted successfully!");
-};
+  const deleteContact = (id) => {
+    const updatedContacts = contacts.filter((c) => c.id !== id);
+    setContacts(updatedContacts);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+    showSuccess("Contact deleted successfully!");
+  };
 
-const deleteBulkContacts = (ids) => {
-  const updatedContacts = contacts.filter((c) => !ids.includes(c.id));
-  setContacts(updatedContacts);
-  localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-  showSuccess("Contacts deleted successfully!");
-};
+  const deleteBulkContacts = (ids) => {
+    const updatedContacts = contacts.filter((c) => !ids.includes(c.id));
+    setContacts(updatedContacts);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+    showSuccess("Contacts deleted successfully!");
+  };
 
- useEffect(() => {
+  const { successMessage, errorMessages, showSuccess, showError } =
+    useNotifications();
+
+  useEffect(() => {
     const filtered = contacts.filter((contact) => {
-      const fullText = `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
+      const fullText =
+        `${contact.firstName} ${contact.lastName} ${contact.email}`.toLowerCase();
       return fullText.includes(search.toLowerCase());
     });
     setFilteredContacts(filtered);
   }, [contacts, search]);
-
-
 
   useEffect(() => {
     const stored = localStorage.getItem("contacts");
