@@ -39,8 +39,8 @@ JSON Server (local API)
 Clone the project
 
 ```bash
-git clone https://github.com/Diana-Abyaneh/diana-abyaneh_week16.git
-cd diana-abyaneh_week16.git
+git clone https://github.com/Diana-Abyaneh/diana-abyaneh_week17.git
+cd diana-abyaneh_week17.git
 ```
 
 Install dependencies
