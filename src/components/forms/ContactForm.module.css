@@ -1,5 +1,6 @@
 .formInputs {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   flex-wrap: nowrap;
   gap: 0.5rem;
@@ -8,8 +9,9 @@
 }
 
 .formInputs button {
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.7rem;
   width: 120px;
+  height: 45px;
   padding: 0.6rem 0.75rem;
   font-size: 0.8rem;
   border: 1px solid #ccc;

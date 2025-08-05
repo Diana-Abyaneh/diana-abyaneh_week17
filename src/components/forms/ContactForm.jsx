@@ -58,7 +58,6 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.formInputs}>
-        <div>
           {contactFormFields.map((field) => (
             <FormField
               key={field.name}
@@ -67,7 +66,6 @@ function ContactForm() {
               error={errors[field.name]}
             />
           ))}
-        </div>
         <button type="submit">
           {editableContact ? "Update Contact" : "Add Contact"}
         </button>
