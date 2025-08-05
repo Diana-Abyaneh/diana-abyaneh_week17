@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { useNotifications } from "../utils/useNotifications";
+import { useNotifications } from "../utils/useNotifications.js";
 
 const ContactContext = createContext();
 

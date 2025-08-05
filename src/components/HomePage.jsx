@@ -6,6 +6,7 @@ import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
 import styles from "./HomePage.module.css";
 import useModalManager from "../utils/useModalManager";
+import SearchBox from "./SearchBox";
 
 function HomePage() {
   const {
@@ -70,15 +71,8 @@ function HomePage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Contact App</h1>
-      <section className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="Search contacts..."
-          className={styles.search}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </section>
+      <SearchBox value={search} onChange={(e) => setSearch(e.target.value)} />
+
       <hr />
       <br />
 
