@@ -16,4 +16,5 @@ function ConfirmModal({ message, onConfirm, onCancel }) {
   );
 }
 
+
 export default ConfirmModal;

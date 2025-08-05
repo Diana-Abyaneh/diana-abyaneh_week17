@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
+
 import styles from "./ContactList.module.css"
 
 function ContactList({ onRequestDelete, onEditContact }) {
   const { selectedContacts, setSelectedContacts, filteredContacts } =
+
     useContext(ContactContext);
 
   const getAvatar = (contact) => {
@@ -47,6 +49,7 @@ function ContactList({ onRequestDelete, onEditContact }) {
               </p>{" "}
               <p className={styles.contactEmail}>{contact.email}</p>
               <section className={styles.contactBtn}>
+
                 <button onClick={() => onRequestDelete(contact)}>Delete</button>
                 <button onClick={() => onEditContact(contact)}>Edit</button>
               </section>

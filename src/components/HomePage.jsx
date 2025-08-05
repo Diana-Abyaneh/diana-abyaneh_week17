@@ -35,6 +35,7 @@ function HomePage() {
     setIsBulkDelete,
   } = useModalManager();
 
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleEditContact = (contact) => {
@@ -73,7 +74,6 @@ function HomePage() {
     <div className={styles.container}>
       <h1 className={styles.heading}>Contact App</h1>
       <SearchBox value={search} onChange={(e) => setSearch(e.target.value)} />
-
       <hr />
       <br />
 
