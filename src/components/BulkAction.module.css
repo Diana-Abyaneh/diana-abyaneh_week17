@@ -1,0 +1,49 @@
+.bulkBtn {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.bulkBtn button {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  background-color: teal;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.bulkBtn button:hover {
+  background-color: rgb(1, 89, 89);
+}
+
+
+
+@media (max-width: 1024px) {
+  .bulkBtn button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .bulkBtn {
+    display: flex;
+    flex-direction: row;
+  }
+  .bulkBtn button {
+    width: 35vw;
+  }
+
+}
+
+@media (max-width: 480px) {
+ 
+  .bulkBtn button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+}

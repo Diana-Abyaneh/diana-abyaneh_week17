@@ -3,10 +3,11 @@ import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
 import ContactForm from "./forms/ContactForm";
 import ContactList from "./ContactList";
-import ConfirmModal from "./ConfirmModal";
 import styles from "./HomePage.module.css";
 import useModalManager from "../utils/useModalManager";
 import SearchBox from "./SearchBox";
+import BulkActions from "./BulkActions";
+import ModalManager from "./ModalManager.jsx";
 
 function HomePage() {
   const {
@@ -98,63 +99,48 @@ function HomePage() {
         onEditContact={handleEditContact}
         onRequestDelete={handleDeleteClick}
       />
-      <section className={styles.bulkBtn}>
-        {filteredContacts.length > 0 && (
-          <div>
-            <button onClick={handleToggleSelectAll}>
-              {selectedContacts.length === filteredContacts.length
-                ? "Unselect All"
-                : "Select All"}
-            </button>
-          </div>
-        )}
+      <BulkActions
+        allSelected={selectedContacts.length === filteredContacts.length}
+        hasContacts={filteredContacts.length > 0}
+        selectedCount={selectedContacts.length}
+        onToggleSelectAll={handleToggleSelectAll}
+        onBulkDelete={handleBulkDeleteClick}
+      />
 
-        {selectedContacts.length > 0 && (
-          <button onClick={handleBulkDeleteClick}>Delete Contacts</button>
-        )}
-      </section>
-      {modalVisible && pendingEditContact && (
-        <ConfirmModal
-          message={`Are you sure you want to edit ${pendingEditContact.firstName}?`}
-          onConfirm={() => {
-            setEditableContact(pendingEditContact);
-            setPendingEditContact(null);
-            setModalVisible(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          onCancel={() => {
-            setPendingEditContact(null);
-            setModalVisible(false);
-            setEditableContact(null);
-          }}
-        />
-      )}
-
-      {modalVisible && (contactToDelete || isBulkDelete) && (
-        <ConfirmModal
-          message={
-            isBulkDelete
-              ? `Are you sure you want to delete ${selectedContacts.length} selected contacts?`
-              : `Are you sure you want to delete ${contactToDelete.firstName}?`
-          }
-          onConfirm={async () => {
-            if (isBulkDelete) {
-              await deleteBulkContacts(selectedContacts);
-              setSelectedContacts([]);
-              setIsBulkDelete(false);
-            } else {
-              await deleteContact(contactToDelete.id);
-              setContactToDelete(null);
-            }
-            setModalVisible(false);
-          }}
-          onCancel={() => {
-            setModalVisible(false);
-            setContactToDelete(null);
+      <ModalManager
+        modalVisible={modalVisible}
+        pendingEditContact={pendingEditContact}
+        contactToDelete={contactToDelete}
+        isBulkDelete={isBulkDelete}
+        selectedCount={selectedContacts.length}
+        onEditConfirm={() => {
+          setEditableContact(pendingEditContact);
+          setPendingEditContact(null);
+          setModalVisible(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        onEditCancel={() => {
+          setPendingEditContact(null);
+          setModalVisible(false);
+          setEditableContact(null);
+        }}
+        onDeleteConfirm={async () => {
+          if (isBulkDelete) {
+            await deleteBulkContacts(selectedContacts);
+            setSelectedContacts([]);
             setIsBulkDelete(false);
-          }}
-        />
-      )}
+          } else {
+            await deleteContact(contactToDelete.id);
+            setContactToDelete(null);
+          }
+          setModalVisible(false);
+        }}
+        onDeleteCancel={() => {
+          setModalVisible(false);
+          setContactToDelete(null);
+          setIsBulkDelete(false);
+        }}
+      />
     </div>
   );
 }
