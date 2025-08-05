@@ -3,29 +3,19 @@ import { useContext } from "react";
 import { ContactContext } from "../../context/ContactContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import Input from "./Input";
-import Select from "./Select";
 import styles from "./ContactForm.module.css";
+import FormField from "../common/FormField";
+import { contactFormFields } from "./ContactFormFields";
+import { contactFormSchema } from "./contactFormSchema";
 
 function ContactForm() {
-  const contactSchema = yup.object({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
-    email: yup
-      .string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    gender: yup.string().notRequired(),
-  });
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(contactSchema),
+    resolver: yupResolver(contactFormSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -69,44 +59,15 @@ function ContactForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.formInputs}>
         <div>
-          <Input
-            label="First Name"
-            name="firstName"
-            register={register}
-            error={errors.firstName}
-          />
+          {contactFormFields.map((field) => (
+            <FormField
+              key={field.name}
+              {...field}
+              register={register}
+              error={errors[field.name]}
+            />
+          ))}
         </div>
-
-        <div>
-          <Input
-            label="Last Name"
-            name="lastName"
-            register={register}
-            error={errors.lastName}
-          />
-        </div>
-        <div>
-          <Input
-            label="Email"
-            name="email"
-            type="email"
-            register={register}
-            error={errors.email}
-          />
-        </div>
-        <div>
-          <Select
-            label="Gender"
-            name="gender"
-            register={register}
-            error={errors.gender}
-            options={[
-              { value: "male", label: "Male" },
-              { value: "female", label: "Female" },
-            ]}
-          />
-        </div>
-
         <button type="submit">
           {editableContact ? "Update Contact" : "Add Contact"}
         </button>

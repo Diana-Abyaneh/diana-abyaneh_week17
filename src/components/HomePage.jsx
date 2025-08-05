@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ContactContext } from "../context/ContactContext";
-import ContactForm from "./form/ContactForm";
+import ContactForm from "./forms/ContactForm";
 import ContactList from "./ContactList";
 import ConfirmModal from "./ConfirmModal";
 import styles from "./HomePage.module.css";
+import useModalManager from "../utils/useModalManager";
 
 function HomePage() {
   const {
@@ -21,12 +22,16 @@ function HomePage() {
     filteredContacts,
   } = useContext(ContactContext);
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [contactToDelete, setContactToDelete] = useState(null);
-
-  const [isBulkDelete, setIsBulkDelete] = useState(false);
-
-  const [pendingEditContact, setPendingEditContact] = useState(null);
+  const {
+    modalVisible,
+    setModalVisible,
+    pendingEditContact,
+    setPendingEditContact,
+    contactToDelete,
+    setContactToDelete,
+    isBulkDelete,
+    setIsBulkDelete,
+  } = useModalManager();
 
   const [isLoaded, setIsLoaded] = useState(false);
 
